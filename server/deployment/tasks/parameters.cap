@@ -1,0 +1,12 @@
+namespace :laravel do
+	desc 'Install parameters.yml'
+	task :parameters do
+		on roles(:web) do
+			if test("[ -f #{shared_path}/app/config/production/app.php ]")
+				info "configuration already exists on server!"
+			else
+				upload! "app/config/production", "#{shared_path}/app/config/", recursive: true
+			end
+		end
+	end
+end
