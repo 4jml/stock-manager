@@ -24,11 +24,12 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
-
-	'local' => array('your-machine-name'),
-
-));
+$env = $app->detectEnvironment(function() {
+	if ($_SERVER['SERVER_NAME'] == 'delormejonathan.fr')
+		return 'production';
+	else
+		return 'local';
+});
 
 /*
 |--------------------------------------------------------------------------
