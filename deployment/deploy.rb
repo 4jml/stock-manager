@@ -1,7 +1,7 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
-set :application, '4JML Stock Manager'
+set :application, '4JMLStockManager'
 
 set :format, :pretty
 set :log_level, :info
@@ -10,7 +10,7 @@ set :pty, true
 
 set :composer_install_flags, '--no-dev --prefer-dist --no-interaction --optimize-autoloader'
 set :linked_files, %w{}
-set :linked_dirs, %w{app/config/production}
+set :linked_dirs, %w{server/app/config/production}
 
 before 'deploy:starting', 'laravel:parameters'
 after 'deploy:updated', 'laravel:migration'

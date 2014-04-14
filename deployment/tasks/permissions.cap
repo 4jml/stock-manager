@@ -2,7 +2,7 @@ namespace :laravel do
 	desc 'Install parameters.yml'
 	task :permissions do
 		on roles(:app) do
-			execute "chmod -R 777 #{fetch(:release_path)}/app/storage/"
+			execute "chmod -R 777 #{fetch(:release_path)}/server/app/storage/"
 		end
 	end
 end

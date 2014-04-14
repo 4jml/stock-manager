@@ -1,0 +1,10 @@
+namespace :laravel do
+	desc 'Clearing cache'
+	task :cache do
+		on roles(:app) do
+			execute :php , "#{fetch(:release_path)}/server/artisan key:generate --env=production"
+			execute :php , "#{fetch(:release_path)}/server/artisan dump-autoload"
+			execute :php , "#{fetch(:release_path)}/server/artisan optimize"
+		end
+	end
+end

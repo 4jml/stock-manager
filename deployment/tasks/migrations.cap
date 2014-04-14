@@ -2,7 +2,7 @@ namespace :laravel do
 	desc 'Running database migrations'
 	task :migration do
 		on roles(:app) do
-			execute :php, "#{fetch(:release_path)}/artisan migrate"
+			execute :php, "#{fetch(:release_path)}/server/artisan migrate"
 		end
 	end
 end
