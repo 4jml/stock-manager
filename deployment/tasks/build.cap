@@ -1,0 +1,8 @@
+namespace :npm do
+	desc 'Running npm installations'
+	task :build do
+		on roles(:app) do
+			execute "npm install"
+		end
+	end
+end
