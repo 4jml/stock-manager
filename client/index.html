@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="stockManager">
 <head>
 	<meta charset="UTF-8">
 	<title>Stock Manager</title>
@@ -13,8 +13,8 @@
 	<link rel="stylesheet" href="css/dist/main.css">
 
 </head>
-<body class="skin-blue">
-	<header class="header">
+<body class="skin-blue" ng-controller="applicationController">
+	<header ng-if="currentUser" class="header">
 		<a href="index.html" class="logo">
 			Stock Manager
 		</a>
@@ -139,7 +139,7 @@
 			</div>
 		</nav>
 	</header>
-	<div class="wrapper row-offcanvas row-offcanvas-left">
+	<div ng-if="currentUser" class="wrapper row-offcanvas row-offcanvas-left">
 		<aside class="left-side sidebar-offcanvas">
 			<section class="sidebar">
 				<div class="user-panel">
@@ -207,8 +207,37 @@
 		</aside><!-- /.right-side -->
 	</div><!-- ./wrapper -->
 
+	<div class="login" ng-if="! currentUser" ng-controller="loginController">
+		<div class="form-box" id="login-box">
+			<div class="header">Connexion à l'espace privé</div>
+			<form action="" method="post">
+				<div class="body bg-gray">
+					<div class="form-group">
+						<input type="text" ng-model="credentials.username" name="username" class="form-control" placeholder="Nom d'utilisateur">
+					</div>
+					<div class="form-group">
+						<input type="password" ng-model="credentials.password" name="password" class="form-control" placeholder="Mot de passe">
+					</div>
+					<div class="form-group">
+						<input type="checkbox" name="remember_me"> Se rappeler
+					</div>
+				</div>
+				<div class="footer">
+					<button type="submit" class="btn bg-olive btn-block">Connexion</button>
+
+					<p><a href="#">J'ai oublié mon mot de passe</a></p>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- Javascripts -->
 	<script src="vendor/jquery/dist/jquery.min.js"></script>
 	<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="js/src/AdminLTE.js"></script>
+	<script src="vendor/angular/angular.min.js"></script>
+	<script src="vendor/angular-route/angular-route.min.js"></script>
+
+	<!-- App -->
+	<script src="js/dist/app.js"></script>
 </body>
 </html>

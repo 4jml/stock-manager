@@ -1,0 +1,1 @@
+var stockManager = angular.module('stockManager' , [ 'ngRoute' ]);
