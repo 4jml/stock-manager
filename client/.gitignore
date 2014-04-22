@@ -2,3 +2,4 @@ node_modules
 vendor
 css/dist
 js/dist
+npm-debug.log
