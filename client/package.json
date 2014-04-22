@@ -1,0 +1,24 @@
+{
+  "name": "stock-manager",
+  "repository": {
+    "type": "git",
+    "url": "git@git.delormejonathan.fr:csia-4jml/stock-manager.git"
+  },
+  "author": "4JML",
+  "license": "MIT",
+  "devDependencies": {
+    "napa": "^0.4.1",
+    "gulp-rename": "^1.2.0",
+    "gulp-plumber": "^0.6.1",
+    "gulp": "^3.6.1",
+    "gulp-less": "^1.2.3"
+  },
+  "scripts": {
+    "install": "napa && bower install",
+    "build": "gulp",
+    "watch": "gulp watch"
+  },
+  "napa": {
+    "AdminLTE": "almasaeed2010/AdminLTE"
+  }
+}
