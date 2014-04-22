@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+	concat = require('gulp-concat'),
 	rename = require('gulp-rename'),
 	plumber = require('gulp-plumber'),
 	less = require('gulp-less');
@@ -8,7 +9,7 @@ var gulp = require('gulp'),
  */
 
 gulp.task('adminLTE-css', function() {
-	return gulp.src('node_modules/AdminLTE/less/AdminLTE.less')
+	return gulp.src('css/src/main.less')
 		.pipe(plumber())
 		.pipe(less().on('error', function(e) { console.log(e); }))
 		.pipe(rename('main.css'))
@@ -19,15 +20,18 @@ gulp.task('adminLTE-css', function() {
  * Stock Manager
  */
 
-gulp.task('html-sources', function() {
-	
-})
+gulp.task('javascripts', function() {
+	gulp.src('js/src/**/*.js')
+		.pipe(concat('app.js'))
+		.pipe(gulp.dest('js/dist/'))
+});
+
 
 /**
  * Misc
  */
 
-gulp.task('default', ['adminLTE-css']);
+gulp.task('default', ['adminLTE-css' , 'javascripts']);
 
 gulp.task('watch', function() {
 	var watcher = gulp.watch([
