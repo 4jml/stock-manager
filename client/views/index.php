@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="vendor/ionicons/css/ionicons.min.css">
-	<link rel="stylesheet" href="css/dist/main.css">
+	<link rel="stylesheet" href="assets/css/main.css">
 
 </head>
 <body class="skin-blue" ng-controller="applicationController">
@@ -238,6 +238,6 @@
 	<script src="vendor/angular-route/angular-route.min.js"></script>
 
 	<!-- App -->
-	<script src="js/dist/app.js"></script>
+	<script src="assets/js/app.js"></script>
 </body>
 </html>

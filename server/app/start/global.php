@@ -79,3 +79,12 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+
+/*
+|--------------------------------------------------------------------------
+| Define Views Locations
+|--------------------------------------------------------------------------
+*/
+
+View::addNamespace('client', base_path() .'/../client/views');
