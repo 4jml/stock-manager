@@ -7,7 +7,6 @@
   "author": "4JML",
   "license": "MIT",
   "devDependencies": {
-    "napa": "^0.4.1",
     "gulp-rename": "^1.2.0",
     "gulp-plumber": "^0.6.1",
     "gulp": "^3.6.1",
@@ -17,11 +16,8 @@
     "gulp-symlink": "^1.0.1"
   },
   "scripts": {
-    "install": "napa && bower install && gulp",
+    "install": "bower install && gulp",
     "build": "gulp",
     "watch": "gulp watch"
-  },
-  "napa": {
-    "AdminLTE": "almasaeed2010/AdminLTE"
   }
 }
