@@ -28,7 +28,12 @@ gulp.task('assets-link', function() {
 		.pipe(symlink('../server/public'));
 });
 
-gulp.task('assets', ['assets-css', 'assets-js', 'assets-link']);
+gulp.task('img-link', function() {
+	return gulp.src('img')
+		.pipe(symlink('../server/public'));
+});
+
+gulp.task('assets', ['assets-css', 'assets-js', 'assets-link', 'img-link']);
 
 /**
  * Vendors

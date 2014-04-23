@@ -1,4 +1,6 @@
 stockManager.service('SessionService', function () {
+	// this.id = true;
+
 	this.create = function (id, username, role) {
 		this.id = id;
 		this.username = username;
