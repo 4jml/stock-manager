@@ -1,21 +1,21 @@
-stockManager.factory('authService', function ($http, sessionService) {
+stockManager.factory('AuthService', function ($http, SessionService) {
 	return {
 		login: function (credentials) {
 			return $http
-			.post('/login', credentials)
+			.post('auth', credentials)
 			.then(function (res) {
-				sessionService.create(res.id, res.userid, res.role);
+				SessionService.create(res.data.id, res.data.username, res.data.role);
 			});
 		},
 		isAuthenticated: function () {
-			return !!sessionService.userId;
+			return !!SessionService.id;
 		},
 		isAuthorized: function (authorizedRoles) {
 			if (!angular.isArray(authorizedRoles)) {
 				authorizedRoles = [authorizedRoles];
 			}
 			return (this.isAuthenticated() &&
-				authorizedRoles.indexOf(sessionService.userRole) !== -1);
+				authorizedRoles.indexOf(SessionService.role) !== -1);
 		}
 	};
 });

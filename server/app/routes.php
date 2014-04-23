@@ -15,3 +15,10 @@ Route::get('/', function()
 {
 	return View::make('client::index');
 });
+
+Route::post('auth', 'UsersController@auth');
+
+Route::group(array('before' => 'auth'), function()
+{
+	Route::controller('users', 'UsersController');
+});

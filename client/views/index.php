@@ -13,8 +13,8 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 
 </head>
-<body class="skin-blue" ng-controller="applicationController">
-	<header ng-if="currentUser" class="header">
+<body class="skin-blue" ng-controller="ApplicationController">
+	<header ng-if="isAuthenticated()" class="header">
 		<a href="index.html" class="logo">
 			Stock Manager
 		</a>
@@ -104,13 +104,13 @@
 					<li class="dropdown user user-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="glyphicon glyphicon-user"></i>
-							<span>Jane Doe <i class="caret"></i></span>
+							<span>{{ app.user.username }} <i class="caret"></i></span>
 						</a>
 						<ul class="dropdown-menu">
 							<li class="user-header bg-light-blue">
 								<img src="img/avatar3.png" class="img-circle" alt="User Image" />
 								<p>
-									Jane Doe - Web Developer
+									{{ app.user.username }}
 									<small>Member since Nov. 2012</small>
 								</p>
 							</li>
@@ -139,7 +139,7 @@
 			</div>
 		</nav>
 	</header>
-	<div ng-if="currentUser" class="wrapper row-offcanvas row-offcanvas-left">
+	<div ng-if="isAuthenticated()" class="wrapper row-offcanvas row-offcanvas-left">
 		<aside class="left-side sidebar-offcanvas">
 			<section class="sidebar">
 				<div class="user-panel">
@@ -147,7 +147,7 @@
 						<img src="img/avatar3.png" class="img-circle" alt="User Image" />
 					</div>
 					<div class="pull-left info">
-						<p>Hello, Jane</p>
+						<p>Bonjour, {{ app.user.username }}</p>
 
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>
@@ -207,13 +207,13 @@
 		</aside><!-- /.right-side -->
 	</div><!-- ./wrapper -->
 
-	<div class="login" ng-if="! currentUser" ng-controller="loginController">
+	<div class="login" ng-if="! isAuthenticated()" ng-controller="LoginController">
 		<div class="form-box" id="login-box">
 			<div class="header">Connexion à l'espace privé</div>
-			<form action="" method="post">
+			<form ng-submit="login(credentials)" method="post" novalidate>
 				<div class="body bg-gray">
 					<div class="form-group">
-						<input type="text" ng-model="credentials.username" name="username" class="form-control" placeholder="Nom d'utilisateur">
+						<input type="text" ng-model="credentials.username" name="username" class="form-control" placeholder="Nom d'utilisateur" autofocus>
 					</div>
 					<div class="form-group">
 						<input type="password" ng-model="credentials.password" name="password" class="form-control" placeholder="Mot de passe">
@@ -236,6 +236,7 @@
 	<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="vendor/angular/angular.min.js"></script>
 	<script src="vendor/angular-route/angular-route.min.js"></script>
+	<script src="vendor/restangular/dist/restangular.min.js"></script>
 
 	<!-- App -->
 	<script src="assets/js/app.js"></script>
