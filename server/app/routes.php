@@ -21,4 +21,5 @@ Route::post('auth', 'UsersController@auth');
 Route::group(array('before' => 'auth'), function()
 {
 	Route::controller('users', 'UsersController');
+	Route::resource('shops', 'ShopsController');
 });
