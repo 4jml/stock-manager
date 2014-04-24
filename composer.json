@@ -19,14 +19,24 @@
 	"scripts": {
 		"post-install-cmd": [
 			"php server/artisan clear-compiled",
-			"php server/artisan optimize"
+			"php server/artisan optimize",
+			"cd client && npm install && cd ../",
+			"cd client && npm run build && cd ../"
 		],
 		"post-update-cmd": [
 			"php server/artisan clear-compiled",
-			"php server/artisan optimize"
+			"php server/artisan optimize",
+			"cd client && npm install && cd ../",
+			"cd client && npm run build && cd ../"
 		],
 		"post-create-project-cmd": [
 			"php server/artisan key:generate"
+		],
+		"build": [
+			"cd client && npm run build && cd ../"
+		],
+		"watch": [
+			"cd client && npm run watch && cd ../"
 		]
 	},
 	"config": {
