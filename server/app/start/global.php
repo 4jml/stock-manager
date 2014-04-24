@@ -1,5 +1,8 @@
 <?php
 
+// See: http://www.andreiboar.com/php/when-exception-is-not-catched-on-laravel/
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader
@@ -49,6 +52,16 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+});
+
+// Return a 404 error for each ModelNotFoundException
+App::error(function(ModelNotFoundException $e)
+{
+    if (Request::wantsJson()) {
+        return Response::json(null, 404);
+    } else {
+        return Response::make('Not Found', 404);
+    }
 });
 
 /*
