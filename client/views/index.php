@@ -237,9 +237,10 @@
 	</div>
 
 	<!-- Javascripts -->
+	<script src="vendor/lodash/dist/lodash.min.js"></script>
 	<script src="vendor/jquery/dist/jquery.min.js"></script>
 	<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="vendor/angular/angular.min.js"></script>
+	<script src="vendor/angular/angular.js"></script>
 	<script src="vendor/angular-route/angular-route.min.js"></script>
 	<script src="vendor/restangular/dist/restangular.min.js"></script>
 
