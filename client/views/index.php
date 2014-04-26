@@ -14,7 +14,7 @@
 
 </head>
 <body class="skin-blue" ng-controller="ApplicationController">
-	<header ng-if="isAuthenticated()" class="header">
+	<header ng-show="isAuthenticated()" class="header">
 		<a href="index.html" class="logo">
 			Stock Manager
 		</a>
@@ -139,7 +139,7 @@
 			</div>
 		</nav>
 	</header>
-	<div ng-if="isAuthenticated()" class="wrapper row-offcanvas row-offcanvas-left">
+	<div ng-show="isAuthenticated()" class="wrapper row-offcanvas row-offcanvas-left">
 		<aside class="left-side sidebar-offcanvas">
 			<section class="sidebar">
 				<div class="user-panel">
@@ -207,7 +207,7 @@
 		</aside><!-- /.right-side -->
 	</div><!-- ./wrapper -->
 
-	<div class="login" ng-if="! isAuthenticated()" ng-controller="LoginController">
+	<div class="login" ng-show="! isAuthenticated()" ng-controller="LoginController">
 		<div class="form-box" id="login-box">
 			<div class="header">Connexion à l'espace privé</div>
 			<form ng-submit="login(credentials)" method="post" novalidate>
@@ -231,7 +231,7 @@
 		</div>
 	</div>
 
-	<div class="loading" ng-if="! isLoaded">
+	<div class="loading" ng-show="! isLoaded">
 		<h1>Stock Manager</h1>
 		<img src="img/loading.gif">
 	</div>
