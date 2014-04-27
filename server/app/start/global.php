@@ -101,3 +101,12 @@ require app_path().'/filters.php';
 */
 
 View::addNamespace('client', base_path() .'/../client/views');
+
+
+/*
+|--------------------------------------------------------------------------
+| Define Views Extensions
+|--------------------------------------------------------------------------
+*/
+
+View::addExtension('html', 'php');
