@@ -1,4 +1,4 @@
-stockManager.controller('ApplicationController', function ($scope, $timeout, AUTH_EVENTS, USER_ROLES, AuthService, SessionService) {
+stockManager.controller('ApplicationController', function ($rootScope, $scope, $timeout, $route, AUTH_EVENTS, USER_ROLES, AuthService, SessionService) {
 	$scope.app = { user : SessionService };
 	$scope.isAuthorized = AuthService.isAuthorized;
 	$scope.isAuthenticated = AuthService.isAuthenticated;
@@ -8,5 +8,10 @@ stockManager.controller('ApplicationController', function ($scope, $timeout, AUT
 		$timeout(function() {
 			$scope.isLoaded = true;
 		}, 500);
+	});
+
+	$rootScope.$on("$routeChangeSuccess", function(currentRoute, previousRoute){
+		$scope.app.routeTitle = $route.current.routeTitle;
+		$scope.app.routeName = $route.current.routeName;
 	});
 });
