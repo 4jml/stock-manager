@@ -23,6 +23,7 @@
     "angular": "~1.2.16",
     "angular-route": "~1.2.16",
     "AdminLTE": "https://github.com/almasaeed2010/AdminLTE.git",
-    "restangular": "~1.3.1"
+    "restangular": "~1.3.1",
+    "datatables": "~1.10.0"
   }
 }
