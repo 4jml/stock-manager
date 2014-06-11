@@ -31,6 +31,24 @@ stockManager.config(['$routeProvider',
 				routeTitle: 'Liste | Magasins',
 				routeName: 'shops_list'
 			}).
+			when('/products/add', {
+				templateUrl: 'views/products/edit.html',
+				controller: 'ProductsAddController',
+				routeTitle: 'Ajout | Produits',
+				routeName: 'products_add'
+			}).
+			when('/products/edit/:id', {
+				templateUrl: 'views/products/edit.html',
+				controller: 'ProductsEditController',
+				routeTitle: 'Édition | Produits',
+				routeName: 'products_edit'
+			}).
+			when('/products/list', {
+				templateUrl: 'views/products/list.html',
+				controller: 'ProductsListController',
+				routeTitle: 'Liste | Produits',
+				routeName: 'products_list'
+			}).
 			otherwise({
 				redirectTo: '/'
 			});
