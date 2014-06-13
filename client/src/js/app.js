@@ -13,6 +13,12 @@ stockManager.config(['$routeProvider',
 				routeTitle: 'Dashboard',
 				routeName: 'dashboard'
 			}).
+			when('/search/:query', {
+				templateUrl: 'views/misc/search.html',
+				controller: 'SearchController',
+				routeTitle: 'Recherche',
+				routeName: 'search'
+			}).
 			when('/shops/add', {
 				templateUrl: 'views/shops/edit.html',
 				controller: 'ShopsAddController',

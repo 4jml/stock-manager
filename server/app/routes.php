@@ -20,7 +20,12 @@ Route::post('auth', 'UsersController@auth');
 
 Route::group(array('before' => 'auth'), function()
 {
+	// API REST
 	Route::controller('users', 'UsersController');
 	Route::resource('shops', 'ShopsController');
 	Route::resource('products', 'ProductsController');
+
+	// SEARCH ENGINE
+	Route::get('shops/search/{query}', 'ShopsController@search');
+	Route::get('products/search/{query}', 'ProductsController@search');
 });

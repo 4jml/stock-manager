@@ -70,4 +70,25 @@ class ProductsController extends \BaseController {
 	}
 
 
+	/**
+	 * Search resources from storage.
+	 *
+	 * @param  string  $query
+	 * @return Response
+	 */
+	public function search($query)
+	{
+		$query = '%' . trim($query). '%';
+
+		$products = Product::where('name', 'LIKE', $query)
+						   ->orWhere('description', 'LIKE', $query)
+						   ->orWhere('price', 'LIKE', $query)
+						   ->orWhere('weight', 'LIKE', $query)
+						   ->orWhere('barcode', 'LIKE', $query)
+						   ->get();
+
+		return Response::json($products);
+	}
+
+
 }

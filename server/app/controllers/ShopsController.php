@@ -70,4 +70,25 @@ class ShopsController extends \BaseController {
 	}
 
 
+	/**
+	 * Search resources from storage.
+	 *
+	 * @param  string  $query
+	 * @return Response
+	 */
+	public function search($query)
+	{
+		$query = '%' . trim($query). '%';
+
+		$shops = Shop::where('name', 'LIKE', $query)
+						   ->orWhere('description', 'LIKE', $query)
+						   ->orWhere('address', 'LIKE', $query)
+						   ->orWhere('zip', 'LIKE', $query)
+						   ->orWhere('city', 'LIKE', $query)
+						   ->get();
+
+		return Response::json($shops);
+	}
+
+
 }
