@@ -1,6 +1,6 @@
 <?php
 
-class ShopTableSeeder extends Seeder {
+class ShopsTableSeeder extends Seeder {
 
 	public function run()
 	{
