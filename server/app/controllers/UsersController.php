@@ -16,9 +16,4 @@ class UsersController extends BaseController {
 			return Response::make(null, 401);
 		}
 	}
-
-	public function getIndex()
-	{
-		echo 'test';
-	}
 }

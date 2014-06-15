@@ -20,9 +20,19 @@ class ProductsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$product = Product::create(Input::all());
+		$validator = Validator::make(Input::all(), array(
+			'name' => 'required|min:3',
+			'price' => 'required|numeric|max:999999.99',
+			'weight' => 'required|numeric|max:999.999',
+			'barcode' => 'required|alpha_num'
+		));
 
-		return Response::json($product);
+		if ($validator->passes()) {
+			$product = Product::create(Input::all());
+			return Response::json($product);
+		} else {
+			return Response::json($validator->messages(), 409);
+		}
 	}
 
 
@@ -35,7 +45,6 @@ class ProductsController extends \BaseController {
 	public function show($id)
 	{
 		$product = Product::findOrFail($id);
-
 		return Response::json($product);
 	}
 
@@ -48,11 +57,22 @@ class ProductsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$product = Product::find($id);
-		$product->fill(Input::all());
-		$product->save();
+		$validator = Validator::make(Input::all(), array(
+			'name' => 'min:3',
+			'price' => 'numeric|max:999999.99',
+			'weight' => 'numeric|max:999.999',
+			'barcode' => 'alpha_num'
+		));
 
-		return Response::json($product);
+		if ($validator->passes()) {
+			$product = Product::find($id);
+			$product->fill(Input::all());
+			$product->save();
+
+			return Response::json($product);
+		} else {
+			return Response::json($validator->messages(), 409);
+		}
 	}
 
 
@@ -65,7 +85,6 @@ class ProductsController extends \BaseController {
 	public function destroy($id)
 	{
 		Product::destroy($id);
-
 		return Response::make();
 	}
 
@@ -89,6 +108,5 @@ class ProductsController extends \BaseController {
 
 		return Response::json($products);
 	}
-
 
 }

@@ -20,9 +20,18 @@ class ShopsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$shop = Shop::create(Input::all());
+		$validator = Validator::make(Input::all(), array(
+			'name' => 'required|min:3',
+			'zip' => 'digits:5',
+			'city' => 'min:3'
+		));
 
-		return Response::json($shop);
+		if ($validator->passes()) {
+			$shop = Shop::create(Input::all());
+			return Response::json($shop);
+		} else {
+			return Response::json($validator->messages(), 409);
+		}
 	}
 
 
@@ -35,7 +44,6 @@ class ShopsController extends \BaseController {
 	public function show($id)
 	{
 		$shop = Shop::findOrFail($id);
-
 		return Response::json($shop);
 	}
 
@@ -48,11 +56,21 @@ class ShopsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$shop = Shop::find($id);
-		$shop->fill(Input::all());
-		$shop->save();
+		$validator = Validator::make(Input::all(), array(
+			'name' => 'min:3',
+			'zip' => 'digits:5',
+			'city' => 'min:3'
+		));
 
-		return Response::json($shop);
+		if ($validator->passes()) {
+			$shop = Shop::find($id);
+			$shop->fill(Input::all());
+			$shop->save();
+
+			return Response::json($shop);
+		} else {
+			return Response::json($validator->messages(), 409);
+		}
 	}
 
 
@@ -65,7 +83,6 @@ class ShopsController extends \BaseController {
 	public function destroy($id)
 	{
 		Shop::destroy($id);
-
 		return Response::make();
 	}
 
@@ -89,6 +106,5 @@ class ShopsController extends \BaseController {
 
 		return Response::json($shops);
 	}
-
 
 }
