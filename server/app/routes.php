@@ -11,21 +11,27 @@
 |
 */
 
+// Index
 Route::get('/', function()
 {
 	return View::make('client::index');
 });
 
+// Authentication
 Route::post('auth', 'UsersController@auth');
 
+// All the routes that require authentication
 Route::group(array('before' => 'auth'), function()
 {
-	// API REST
+	// REST API
 	Route::controller('users', 'UsersController');
 	Route::resource('shops', 'ShopsController');
 	Route::resource('products', 'ProductsController');
+    Route::resource('suppliers', 'SuppliersController');
+	Route::resource('suppliers.products', 'SuppliersProductsController');
 
-	// SEARCH ENGINE
+	// Search engine
 	Route::get('shops/search/{query}', 'ShopsController@search');
 	Route::get('products/search/{query}', 'ProductsController@search');
+
 });

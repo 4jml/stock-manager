@@ -19,6 +19,20 @@ class ProductsTableSeeder extends Seeder {
             'weight' => 2.6,
             'barcode' => 'f1972a094bf65111c8d644b86d5e7b7b'
         ));
+
+        Product::create(array(
+            'name' => 'Troisième produit',
+            'price' => 45,
+            'weight' => 1.2,
+            'barcode' => 'c0a96aa1622ac282126709095eefa8bf'
+        ));
+
+        Product::create(array(
+            'name' => 'Quatrième produit',
+            'price' => 29.99,
+            'weight' => 2.6,
+            'barcode' => 'f1972a094bf65111c8d644b86d5e7b7b'
+        ));
     }
 
 }
