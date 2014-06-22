@@ -30,7 +30,7 @@ class ShopsController extends \BaseController {
 			$shop = Shop::create(Input::all());
 			return Response::json($shop);
 		} else {
-			return Response::json($validator->messages(), 409);
+			return Response::json($validator->messages(), 400);
 		}
 	}
 
@@ -69,7 +69,7 @@ class ShopsController extends \BaseController {
 
 			return Response::json($shop);
 		} else {
-			return Response::json($validator->messages(), 409);
+			return Response::json($validator->messages(), 400);
 		}
 	}
 

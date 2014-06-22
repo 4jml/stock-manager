@@ -31,7 +31,7 @@ class ProductsController extends \BaseController {
 			$product = Product::create(Input::all());
 			return Response::json($product);
 		} else {
-			return Response::json($validator->messages(), 409);
+			return Response::json($validator->messages(), 400);
 		}
 	}
 
@@ -71,7 +71,7 @@ class ProductsController extends \BaseController {
 
 			return Response::json($product);
 		} else {
-			return Response::json($validator->messages(), 409);
+			return Response::json($validator->messages(), 400);
 		}
 	}
 

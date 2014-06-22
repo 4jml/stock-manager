@@ -37,7 +37,7 @@ class SuppliersController extends \BaseController {
 			$supplier = Supplier::create(Input::all());
 			return Response::json($supplier);
 		} else {
-			return Response::json($validator->messages(), 409);
+			return Response::json($validator->messages(), 400);
 		}
 	}
 
@@ -82,7 +82,7 @@ class SuppliersController extends \BaseController {
 
 			return Response::json($supplier);
 		} else {
-			return Response::json($validator->messages(), 409);
+			return Response::json($validator->messages(), 400);
 		}
 	}
 
