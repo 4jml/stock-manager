@@ -27,6 +27,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::controller('users', 'UsersController');
 	Route::resource('shops', 'ShopsController');
 	Route::resource('products', 'ProductsController');
+	Route::resource('products.suppliers', 'ProductsSuppliersController');
     Route::resource('suppliers', 'SuppliersController');
 	Route::resource('suppliers.products', 'SuppliersProductsController');
 

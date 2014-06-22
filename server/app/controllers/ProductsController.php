@@ -9,7 +9,13 @@ class ProductsController extends \BaseController {
 	 */
 	public function index()
 	{
-		return Response::json(Product::all());
+		$products = Product::all();
+
+		if (Input::has('nesting')) {
+			$products->load('suppliers');
+		}
+
+		return Response::json($products);
 	}
 
 
@@ -45,6 +51,11 @@ class ProductsController extends \BaseController {
 	public function show($id)
 	{
 		$product = Product::findOrFail($id);
+
+		if (Input::has('nesting')) {
+			$product->load('suppliers');
+		}
+
 		return Response::json($product);
 	}
 
