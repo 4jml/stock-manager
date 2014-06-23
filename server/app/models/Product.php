@@ -9,4 +9,13 @@ class Product extends Eloquent {
 		return $this->belongsToMany('Supplier')->withTimestamps();
 	}
 
+	public function expose()
+	{
+		$base = $this->toArray();
+
+		foreach ($base['suppliers'] as $key => $supplier)
+			$base['suppliers'][$key] = $supplier['id'];
+
+		return $base;
+	}
 }

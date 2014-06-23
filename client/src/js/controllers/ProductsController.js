@@ -3,8 +3,12 @@ stockManager.controller('ProductsAddController', function ($scope, $location, Re
 
 	$scope.product = {};
 
+	Restangular.all("suppliers").getList().then(function(suppliers) {
+		$scope.suppliers = suppliers;
+	});
+
 	$scope.save = function() {
-		Restangular.all('products').post($scope.product).then(function() {
+		Restangular.all('products').post($scope.product, null, { suppliers : $scope.product.suppliers }).then(function() {
 			$location.path('/products/list');
 		});
 	};
@@ -13,19 +17,20 @@ stockManager.controller('ProductsAddController', function ($scope, $location, Re
 stockManager.controller('ProductsEditController', function ($scope, $routeParams, Restangular) {
 	$scope.title = 'Édition';
 
-	Restangular.one("products", $routeParams.id).get().then(function(product) {
+	Restangular.one("products", $routeParams.id).get({ nesting : 1 }).then(function(product) {
 		$scope.product = product;
+	});
+	Restangular.all("suppliers").getList().then(function(suppliers) {
+		$scope.suppliers = suppliers;
 	});
 
 	$scope.save = function() {
-		$scope.product.put();
+		$scope.product.put({ suppliers : $scope.product.suppliers });
 	};
 });
 
 stockManager.controller('ProductsListController', function ($scope, $route, Restangular) {
-	$scope.productsAPI = Restangular.all('products');
-
-	$scope.productsAPI.getList().then(function(products) {
+	Restangular.all('products').getList().then(function(products) {
 		$scope.products = products;
 	});
 

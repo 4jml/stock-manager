@@ -35,6 +35,8 @@ class ProductsController extends \BaseController {
 
 		if ($validator->passes()) {
 			$product = Product::create(Input::all());
+			$product->suppliers()->sync(Input::get('suppliers', array()));
+			
 			return Response::json($product);
 		} else {
 			return Response::json($validator->messages(), 400);
@@ -56,7 +58,7 @@ class ProductsController extends \BaseController {
 			$product->load('suppliers');
 		}
 
-		return Response::json($product);
+		return Response::json($product->expose());
 	}
 
 
@@ -79,6 +81,8 @@ class ProductsController extends \BaseController {
 			$product = Product::find($id);
 			$product->fill(Input::all());
 			$product->save();
+
+			$product->suppliers()->sync(Input::get('suppliers', array()));
 
 			return Response::json($product);
 		} else {
