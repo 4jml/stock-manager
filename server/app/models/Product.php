@@ -8,6 +8,10 @@ class Product extends Eloquent {
 	{
 		return $this->belongsToMany('Supplier')->withTimestamps();
 	}
+	public function stock()
+	{
+		return $this->belongsTo('Stock');
+	}
 
 	public function expose()
 	{

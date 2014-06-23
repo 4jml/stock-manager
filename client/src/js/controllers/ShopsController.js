@@ -16,6 +16,9 @@ stockManager.controller('ShopsEditController', function ($scope, $routeParams, R
 	Restangular.one("shops", $routeParams.id).get().then(function(shop) {
 		$scope.shop = shop;
 	});
+	Restangular.one("shops", $routeParams.id).getList('products').then(function(products) {
+		$scope.products = products;
+	});
 
 	$scope.save = function() {
 		$scope.shop.put();
