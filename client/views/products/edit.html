@@ -52,5 +52,30 @@
 				</form>
 			</div>
 		</div>
+		<div class="col-lg-6">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Liste des magasins qui ont le produit</strong></h3>
+				</div><!-- /.box-header -->
+				<div class="box-body table-responsive">
+					<table id="shops_table" class="table table-hover table-striped" datatable watch="shops">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Nom</th>
+								<th>Quantité</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="shop in shops">
+								<td>{{ shop.id }}</td>
+								<td>{{ shop.name }}</td>
+								<td>{{ shop.quantity }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- /.box-body -->
+			</div>
+		</div>
 	</div>
 </section><!-- /.content -->

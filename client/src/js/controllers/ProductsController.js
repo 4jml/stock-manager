@@ -20,6 +20,9 @@ stockManager.controller('ProductsEditController', function ($scope, $routeParams
 	Restangular.one("products", $routeParams.id).get({ nesting : 1 }).then(function(product) {
 		$scope.product = product;
 	});
+	Restangular.one("products", $routeParams.id).getList('stocks').then(function(shops) {
+		$scope.shops = shops;
+	});
 	Restangular.all("suppliers").getList().then(function(suppliers) {
 		$scope.suppliers = suppliers;
 	});
