@@ -32,9 +32,11 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('suppliers.products', 'SuppliersProductsController');
 	Route::resource('shops.products', 'ShopsProductsController');
 	Route::resource('products.stocks', 'ProductsStocksController');
+	Route::resource('drivers', 'DriversController');
 
 	// Search engine
 	Route::get('shops/search/{query}', 'ShopsController@search');
 	Route::get('products/search/{query}', 'ProductsController@search');
+	Route::get('drivers/search/{query}', 'DriversController@search');
 
 });

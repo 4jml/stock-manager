@@ -55,6 +55,24 @@ stockManager.config(['$routeProvider',
 				routeTitle: 'Liste | Produits',
 				routeName: 'products_list'
 			}).
+			when('/drivers/add', {
+				templateUrl: 'views/drivers/edit.html',
+				controller: 'DriversAddController',
+				routeTitle: 'Ajout | Conducteurs',
+				routeName: 'drivers_add'
+			}).
+			when('/drivers/edit/:id', {
+				templateUrl: 'views/drivers/edit.html',
+				controller: 'DriversEditController',
+				routeTitle: 'Édition | Conducteurs',
+				routeName: 'drivers_edit'
+			}).
+			when('/drivers/list', {
+				templateUrl: 'views/drivers/list.html',
+				controller: 'DriversListController',
+				routeTitle: 'Liste | Conducteurs',
+				routeName: 'drivers_list'
+			}).
 			otherwise({
 				redirectTo: '/'
 			});
