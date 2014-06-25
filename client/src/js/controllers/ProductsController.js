@@ -18,6 +18,9 @@ stockManager.controller('ProductsEditController', function ($scope, $routeParams
 	$scope.title = 'Édition';
 
 	Restangular.one("products", $routeParams.id).get({ nesting : 1 }).then(function(product) {
+		angular.forEach(product.suppliers, function(value, key) {
+			product.suppliers[key] = value.id;
+		});
 		$scope.product = product;
 	});
 	Restangular.one("products", $routeParams.id).getList('stocks').then(function(shops) {
@@ -29,6 +32,7 @@ stockManager.controller('ProductsEditController', function ($scope, $routeParams
 
 	$scope.save = function() {
 		$scope.product.put({ suppliers : $scope.product.suppliers });
+		Restangular.one('products', $scope.product.id).all('suppliers').post($scope.product.suppliers);
 	};
 });
 

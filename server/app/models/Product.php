@@ -12,14 +12,4 @@ class Product extends Eloquent {
 	{
 		return $this->belongsTo('Stock');
 	}
-
-	public function expose()
-	{
-		$base = $this->toArray();
-
-		foreach ($base['suppliers'] as $key => $supplier)
-			$base['suppliers'][$key] = $supplier['id'];
-
-		return $base;
-	}
 }
