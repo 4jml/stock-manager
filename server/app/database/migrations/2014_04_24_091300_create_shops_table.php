@@ -16,10 +16,10 @@ class CreateShopsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->text('description');
-			$table->string('address');
-			$table->integer('zip');
-			$table->string('city');
+			$table->text('description')->nullable();
+			$table->string('address')->nullable();
+			$table->integer('zip')->nullable();
+			$table->string('city')->nullable();
 			$table->timestamps();
 		});
 	}
