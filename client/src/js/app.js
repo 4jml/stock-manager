@@ -73,6 +73,24 @@ stockManager.config(['$routeProvider',
 				routeTitle: 'Liste | Conducteurs',
 				routeName: 'drivers_list'
 			}).
+			when('/vehicules/add', {
+				templateUrl: 'views/vehicules/edit.html',
+				controller: 'VehiculesAddController',
+				routeTitle: 'Ajout | Véhicules',
+				routeName: 'vehicules_add'
+			}).
+			when('/vehicules/edit/:id', {
+				templateUrl: 'views/vehicules/edit.html',
+				controller: 'VehiculesEditController',
+				routeTitle: 'Édition | Véhicules',
+				routeName: 'vehicules_edit'
+			}).
+			when('/vehicules/list', {
+				templateUrl: 'views/vehicules/list.html',
+				controller: 'VehiculesListController',
+				routeTitle: 'Liste | Véhicules',
+				routeName: 'vehicules_list'
+			}).
 			otherwise({
 				redirectTo: '/'
 			});

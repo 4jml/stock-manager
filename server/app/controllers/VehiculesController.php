@@ -1,6 +1,6 @@
 <?php
 
-class DriversController extends \BaseController {
+class VehiculesController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,9 +9,9 @@ class DriversController extends \BaseController {
 	 */
 	public function index()
 	{
-		$drivers = Driver::all();
+		$vehicules = Vehicule::all();
 
-		return Response::json($drivers);
+		return Response::json($vehicules);
 	}
 
 
@@ -23,13 +23,15 @@ class DriversController extends \BaseController {
 	public function store()
 	{
 		$validator = Validator::make(Input::all(), array(
-			'lastname' => 'required|min:3',
+			'make' => 'required|min:3',
+			'model' => 'required|min:3',
+			'plate' => 'required|min:3',
 		));
 
 		if ($validator->passes()) {
-			$driver = Driver::create(Input::all());
+			$vehicule = Vehicule::create(Input::all());
 
-			return Response::json($driver);
+			return Response::json($vehicule);
 		} else {
 			return Response::json($validator->messages(), 400);
 		}
@@ -44,9 +46,9 @@ class DriversController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$driver = Driver::findOrFail($id);
+		$vehicule = Vehicule::findOrFail($id);
 
-		return Response::json($driver);
+		return Response::json($vehicule);
 	}
 
 
@@ -59,15 +61,17 @@ class DriversController extends \BaseController {
 	public function update($id)
 	{
 		$validator = Validator::make(Input::all(), array(
-			'lastname' => 'min:3',
+			'make' => 'min:3',
+			'model' => 'min:3',
+			'plate' => 'min:3',
 		));
 
 		if ($validator->passes()) {
-			$driver = Driver::find($id);
-			$driver->fill(Input::all());
-			$driver->save();
+			$vehicule = Vehicule::find($id);
+			$vehicule->fill(Input::all());
+			$vehicule->save();
 
-			return Response::json($driver);
+			return Response::json($vehicule);
 		} else {
 			return Response::json($validator->messages(), 400);
 		}
@@ -82,7 +86,7 @@ class DriversController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		Driver::destroy($id);
+		Vehicule::destroy($id);
 		return Response::make();
 	}
 
@@ -97,11 +101,11 @@ class DriversController extends \BaseController {
 	{
 		$query = '%' . trim($query). '%';
 
-		$drivers = Driver::where('lastname', 'LIKE', $query)
-						   ->orWhere('firstname', 'LIKE', $query)
+		$vehicules = Vehicule::where('make', 'LIKE', $query)
+						   ->orWhere('model', 'LIKE', $query)
 						   ->get();
 
-		return Response::json($drivers);
+		return Response::json($vehicules);
 	}
 
 }

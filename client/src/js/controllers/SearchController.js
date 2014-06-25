@@ -10,4 +10,7 @@ stockManager.controller('SearchController', function ($scope, $routeParams, Rest
 	Restangular.all('drivers/search/' + $scope.query).getList().then(function(drivers) {
 		$scope.drivers = drivers;
 	});
+	Restangular.all('vehicules/search/' + $scope.query).getList().then(function(vehicules) {
+		$scope.vehicules = vehicules;
+	});
 });

@@ -3,10 +3,6 @@ stockManager.controller('DriversAddController', function ($scope, $location, Res
 
 	$scope.driver = {};
 
-	Restangular.all("suppliers").getList().then(function(suppliers) {
-		$scope.suppliers = suppliers;
-	});
-
 	$scope.save = function() {
 		Restangular.all('drivers').post($scope.driver).then(function() {
 			$location.path('/drivers/list');
@@ -19,9 +15,6 @@ stockManager.controller('DriversEditController', function ($scope, $routeParams,
 
 	Restangular.one("drivers", $routeParams.id).get({ nesting : 1 }).then(function(driver) {
 		$scope.driver = driver;
-	});
-	Restangular.all("suppliers").getList().then(function(suppliers) {
-		$scope.suppliers = suppliers;
 	});
 
 	$scope.save = function() {
