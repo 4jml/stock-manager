@@ -103,6 +103,7 @@ class VehiculesController extends \BaseController {
 
 		$vehicules = Vehicule::where('make', 'LIKE', $query)
 						   ->orWhere('model', 'LIKE', $query)
+						   ->orWhere('plate', 'LIKE', $query)
 						   ->get();
 
 		return Response::json($vehicules);

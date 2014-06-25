@@ -39,5 +39,6 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('shops/search/{query}', 'ShopsController@search');
 	Route::get('products/search/{query}', 'ProductsController@search');
 	Route::get('drivers/search/{query}', 'DriversController@search');
+	Route::get('vehicules/search/{query}', 'VehiculesController@search');
 
 });

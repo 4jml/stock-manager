@@ -17,6 +17,7 @@
 					<li class="active"><a href="#shops" target="_self" data-toggle="tab">Magasins</a></li>
 					<li><a href="#products" target="_self" data-toggle="tab">Produits</a></li>
 					<li><a href="#drivers" target="_self" data-toggle="tab">Conducteurs</a></li>
+					<li><a href="#vehicules" target="_self" data-toggle="tab">Véhicules</a></li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="shops">
@@ -92,6 +93,30 @@
 									<td>{{ driver.firstname }}</td>
 									<td>
 										<a href="#/drivers/edit/{{ driver.id }}" class="btn btn-primary btn-xs"><span class="fa fa-pencil"></span></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="tab-pane" id="vehicules">
+						<table id="vehicules_table" class="table table-hover table-striped" datatable watch="vehicules">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Marque</th>
+									<th>Modèle</th>
+									<th>Plaque</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="vehicule in vehicules">
+									<td>{{ vehicule.id }}</td>
+									<td>{{ vehicule.make }}</td>
+									<td>{{ vehicule.model }}</td>
+									<td>{{ vehicule.plate }}</td>
+									<td>
+										<a href="#/vehicules/edit/{{ vehicule.id }}" class="btn btn-primary btn-xs"><span class="fa fa-pencil"></span></a>
 									</td>
 								</tr>
 							</tbody>
