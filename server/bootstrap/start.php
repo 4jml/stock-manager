@@ -25,14 +25,10 @@ $app = new Illuminate\Foundation\Application;
 */
 
 $env = $app->detectEnvironment(function() {
-	if (isset($_SERVER['SERVER_NAME'])) {
-		if ($_SERVER['SERVER_NAME'] == 'delormejonathan.fr')
-			return 'production';
-		else
-			return 'local';
-	}
-
-	return 'production';
+	if (isset($_ENV['LARAVEL_ENV']))
+		return $_ENV['LARAVEL_ENV'];
+	else
+		return 'local';
 });
 
 /*
