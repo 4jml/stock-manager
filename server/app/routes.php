@@ -34,6 +34,8 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('products.stocks', 'ProductsStocksController');
 	Route::resource('drivers', 'DriversController');
 	Route::resource('vehicules', 'VehiculesController');
+	Route::resource('central/stocks', 'CentralStocksController');
+	Route::resource('central/stocks/logs', 'CentralStockLogsController');
 
 	// Search engine
 	Route::get('shops/search/{query}', 'ShopsController@search');

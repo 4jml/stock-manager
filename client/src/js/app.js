@@ -37,6 +37,12 @@ stockManager.config(['$routeProvider',
 				routeTitle: 'Liste | Magasins',
 				routeName: 'shops_list'
 			}).
+			when('/central', {
+				templateUrl: 'views/central/index.html',
+				controller: 'CentralIndexController',
+				routeTitle: 'Centrale d\'achat',
+				routeName: 'central'
+			}).
 			when('/products/add', {
 				templateUrl: 'views/products/edit.html',
 				controller: 'ProductsAddController',
