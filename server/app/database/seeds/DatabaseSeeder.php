@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('StockLogsTableSeeder');
 		$this->call('CentralStocksTableSeeder');
 		$this->call('CentralStockLogsTableSeeder');
+		$this->call('SectionsTableSeeder');
+		$this->call('CategoriesTableSeeder');
 	}
 
 }
