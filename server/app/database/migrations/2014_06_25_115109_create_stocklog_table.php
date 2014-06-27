@@ -27,6 +27,7 @@ class CreateStocklogTable extends Migration {
 			$table->integer('quantity');
 			$table->timestamps();
 		});
+
 		Schema::create('central_stock_logs', function(Blueprint $table)
 		{
 			$table->increments('id');

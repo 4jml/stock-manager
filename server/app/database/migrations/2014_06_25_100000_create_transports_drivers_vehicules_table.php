@@ -18,6 +18,7 @@ class CreateTransportsDriversVehiculesTable extends Migration {
 			$table->string('lastname');
 			$table->string('firstname');
 		});
+
 		Schema::create('vehicules', function(Blueprint $table)
 		{
 			$table->increments('id');
@@ -25,6 +26,7 @@ class CreateTransportsDriversVehiculesTable extends Migration {
 			$table->string('model');
 			$table->string('plate');
 		});
+
 		Schema::create('transports', function(Blueprint $table)
 		{
 			$table->increments('id');
