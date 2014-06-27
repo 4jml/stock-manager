@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.1
-lock '3.1.0'
+# lock '3.1.0'
 
 set :application, '4JMLStockManager'
 
@@ -16,6 +16,6 @@ before 'deploy:starting', 'laravel:parameters'
 after 'deploy:updated', 'laravel:migration'
 before 'deploy:publishing', 'laravel:cache'
 before 'deploy:publishing', 'laravel:permissions'
-before 'deploy:publishing', 'npm:install'
+before 'deploy:publishing', 'npm:build'
 after 'deploy:published', 'laravel:apc'
 after 'deploy:finishing', 'deploy:cleanup'
