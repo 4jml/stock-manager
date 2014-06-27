@@ -44,6 +44,9 @@ Route::group(array('before' => 'auth'), function()
 
 	Route::resource('central/stocks', 'CentralStocksController');
 	Route::resource('central/stocks/logs', 'CentralStockLogsController');
+	Route::resource('sections', 'SectionsController');
+	Route::resource('sections.categories', 'SectionsCategoriesController');
+	Route::resource('categories', 'CategoriesController');
 
 	// Search engine
 	Route::get('shops/search/{query}', 'ShopsController@search');
