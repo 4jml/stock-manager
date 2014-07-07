@@ -6,6 +6,6 @@ class Category extends Eloquent {
 
 	public function section()
 	{
-		return $this->hasOne('Section');
+		return $this->belongsTo('Section');
 	}
 }

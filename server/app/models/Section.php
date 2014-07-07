@@ -6,6 +6,6 @@ class Section extends Eloquent {
 
 	public function categories()
 	{
-		return $this->belongsTo('Category');
+		return $this->hasMany('Category');
 	}
 }

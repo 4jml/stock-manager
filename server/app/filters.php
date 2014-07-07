@@ -19,7 +19,10 @@ App::before(function($request)
 
 App::after(function($request, $response)
 {
-	//
+	$response->headers->set('Access-Control-Allow-Origin', 'http://radian-drive.local');
+	$response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+	$response->headers->set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	$response->headers->set('Access-Control-Allow-Credentials', 'true');
 });
 
 /*

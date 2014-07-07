@@ -20,6 +20,14 @@ Route::get('/', function()
 // Authentication
 Route::post('auth', 'UsersController@auth');
 
+// Public API
+Route::resource('sections', 'SectionsController');
+Route::resource('sections.categories', 'SectionsCategoriesController');
+Route::resource('categories', 'CategoriesController');
+Route::resource('products', 'ProductsController');
+Route::get('basket/products', 'BasketController@products');
+Route::resource('basket', 'BasketController');
+
 // All the routes that require authentication
 Route::group(array('before' => 'auth'), function()
 {
@@ -29,7 +37,6 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('shops', 'ShopsController');
 	Route::resource('shops.products', 'ShopsProductsController');
 
-	Route::resource('products', 'ProductsController');
 	Route::resource('products.suppliers', 'ProductsSuppliersController');
 	Route::resource('products.stocks', 'ProductsStocksController');
 
@@ -44,9 +51,6 @@ Route::group(array('before' => 'auth'), function()
 
 	Route::resource('central/stocks', 'CentralStocksController');
 	Route::resource('central/stocks/logs', 'CentralStockLogsController');
-	Route::resource('sections', 'SectionsController');
-	Route::resource('sections.categories', 'SectionsCategoriesController');
-	Route::resource('categories', 'CategoriesController');
 
 	// Search engine
 	Route::get('shops/search/{query}', 'ShopsController@search');
