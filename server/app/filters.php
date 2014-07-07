@@ -13,6 +13,15 @@
 
 App::before(function($request)
 {
+	switch($request->headers->get('radian_app'))
+	{
+		case 'radian_drive':
+		{
+			Config::set('auth.model', 'Customer');
+			Config::set('auth.table', 'customers');
+		}
+		break;
+	}
 });
 
 
