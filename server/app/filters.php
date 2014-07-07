@@ -13,15 +13,23 @@
 
 App::before(function($request)
 {
-	//
 });
 
 
 App::after(function($request, $response)
 {
-	$response->headers->set('Access-Control-Allow-Origin', 'http://radian-drive.local');
+	switch($request->headers->get('radian_app'))
+	{
+		case 'radian_drive':
+			$origin = Config::get('app.radian_drive');
+		break;
+		default:
+			$origin = Config::get('app.radian_drive');
+	}
+
+	$response->headers->set('Access-Control-Allow-Origin', $origin);
 	$response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
-	$response->headers->set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	$response->headers->set('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, radian_app');
 	$response->headers->set('Access-Control-Allow-Credentials', 'true');
 });
 

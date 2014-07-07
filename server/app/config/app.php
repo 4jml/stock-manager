@@ -27,6 +27,7 @@ return array(
 	*/
 
 	'url' => 'http://localhost',
+	'radian_drive' => 'http://radian-drive.local',
 
 	/*
 	|--------------------------------------------------------------------------

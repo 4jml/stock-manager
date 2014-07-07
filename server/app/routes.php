@@ -27,6 +27,7 @@ Route::resource('categories', 'CategoriesController');
 Route::resource('products', 'ProductsController');
 Route::get('basket/products', 'BasketController@products');
 Route::resource('basket', 'BasketController');
+Route::resource('shops', 'ShopsController');
 
 // All the routes that require authentication
 Route::group(array('before' => 'auth'), function()
@@ -34,7 +35,6 @@ Route::group(array('before' => 'auth'), function()
 	// REST API
 	Route::controller('users', 'UsersController');
 
-	Route::resource('shops', 'ShopsController');
 	Route::resource('shops.products', 'ShopsProductsController');
 
 	Route::resource('products.suppliers', 'ProductsSuppliersController');
