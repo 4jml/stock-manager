@@ -55,13 +55,23 @@ App::error(function(Exception $exception, $code)
 });
 
 // Return a 404 error for each ModelNotFoundException
-App::error(function(ModelNotFoundException $e)
+App::error(function(Exception $exception, $code)
 {
-    if (Request::wantsJson()) {
-        return Response::json(null, 404);
-    } else {
-        return Response::make('Not Found', 404);
-    }
+	switch ($code)
+	{
+		case 403 : {
+			if (Request::wantsJson())
+				return Response::json(array('error' => 'Not allowed'), $code);
+			else
+				return Response::make('Not allowed', $code);
+		} break;
+		case 404 : {
+			if (Request::wantsJson())
+				return Response::json(array('error' => 'Not found'), $code);
+			else
+				return Response::make('Not found', $code);
+		} break;
+	}
 });
 
 /*
