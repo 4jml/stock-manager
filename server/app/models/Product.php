@@ -2,6 +2,8 @@
 
 class Product extends Eloquent {
 
+    protected $softDelete = true;
+
 	protected $fillable = array('name', 'description', 'price', 'weight', 'barcode');
 
     public function suppliers()

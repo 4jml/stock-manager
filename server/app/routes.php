@@ -25,15 +25,23 @@ Route::group(array('before' => 'auth'), function()
 {
 	// REST API
 	Route::controller('users', 'UsersController');
+
 	Route::resource('shops', 'ShopsController');
+	Route::resource('shops.products', 'ShopsProductsController');
+
 	Route::resource('products', 'ProductsController');
 	Route::resource('products.suppliers', 'ProductsSuppliersController');
+	Route::resource('products.stocks', 'ProductsStocksController');
+
     Route::resource('suppliers', 'SuppliersController');
 	Route::resource('suppliers.products', 'SuppliersProductsController');
-	Route::resource('shops.products', 'ShopsProductsController');
-	Route::resource('products.stocks', 'ProductsStocksController');
-	Route::resource('drivers', 'DriversController');
+
 	Route::resource('vehicules', 'VehiculesController');
+	Route::resource('drivers', 'DriversController');
+
+	Route::resource('orders', 'OrdersController');
+	Route::resource('orders.lines', 'OrderLinesController');
+
 	Route::resource('central/stocks', 'CentralStocksController');
 	Route::resource('central/stocks/logs', 'CentralStockLogsController');
 
