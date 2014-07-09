@@ -17,6 +17,7 @@ class Customer extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var array
 	 */
+	protected $fillable = array('lastname', 'firstname', 'email', 'phone', 'address', 'zip', 'city');
 	protected $hidden = array('password');
 
 	/**

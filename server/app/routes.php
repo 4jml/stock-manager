@@ -28,6 +28,10 @@ Route::resource('products', 'ProductsController');
 Route::get('basket/products', 'BasketController@products');
 Route::resource('basket', 'BasketController');
 Route::resource('shops', 'ShopsController');
+Route::post('customers/auth', 'CustomersController@auth');
+Route::get('customers/disconnect', 'CustomersController@disconnect');
+Route::get('customers/check/{email}', 'CustomersController@check');
+Route::resource('customers', 'CustomersController');
 
 // All the routes that require authentication
 Route::group(array('before' => 'auth'), function()

@@ -30,10 +30,10 @@ App::after(function($request, $response)
 	switch($request->headers->get('radian_app'))
 	{
 		case 'radian_drive':
-			$origin = Config::get('app.radian_drive');
+			$origin = Config::get('app.drive_url');
 		break;
 		default:
-			$origin = Config::get('app.radian_drive');
+			$origin = Config::get('app.drive_url');
 	}
 
 	$response->headers->set('Access-Control-Allow-Origin', $origin);
