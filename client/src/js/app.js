@@ -61,6 +61,42 @@ stockManager.config(['$routeProvider',
 				routeTitle: 'Liste | Produits',
 				routeName: 'products_list'
 			}).
+			when('/sections/add', {
+				templateUrl: 'views/sections/edit.html',
+				controller: 'SectionsAddController',
+				routeTitle: 'Ajout | Sections',
+				routeName: 'sections_add'
+			}).
+			when('/sections/edit/:id', {
+				templateUrl: 'views/sections/edit.html',
+				controller: 'SectionsEditController',
+				routeTitle: 'Édition | Sections',
+				routeName: 'sections_edit'
+			}).
+			when('/sections/list', {
+				templateUrl: 'views/sections/list.html',
+				controller: 'SectionsListController',
+				routeTitle: 'Liste | Sections',
+				routeName: 'sections_list'
+			}).
+			when('/categories/add', {
+				templateUrl: 'views/categories/edit.html',
+				controller: 'CategoriesAddController',
+				routeTitle: 'Ajout | Catégories',
+				routeName: 'categories_add'
+			}).
+			when('/categories/edit/:id', {
+				templateUrl: 'views/categories/edit.html',
+				controller: 'CategoriesEditController',
+				routeTitle: 'Édition | Catégories',
+				routeName: 'categories_edit'
+			}).
+			when('/categories/list', {
+				templateUrl: 'views/categories/list.html',
+				controller: 'CategoriesListController',
+				routeTitle: 'Liste | Catégories',
+				routeName: 'categories_list'
+			}).
 			when('/drivers/add', {
 				templateUrl: 'views/drivers/edit.html',
 				controller: 'DriversAddController',

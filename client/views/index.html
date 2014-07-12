@@ -103,10 +103,17 @@
 							<i class="fa fa-shopping-cart"></i> <span>Centrale d'achat</span>
 						</a>
 					</li>
-					<li ng-class="{ active : app.routeName == 'products_list' }">
-						<a href="#/products/list">
-							<i class="fa fa-cube"></i> <span>Produits</span>
+					<li class="treeview active">
+						<a href="#">
+							<i class="fa fa-cube"></i>
+							<span>Produits</span>
+							<i class="fa fa-angle-left pull-right"></i>
 						</a>
+						<ul class="treeview-menu">
+							<li ng-class="{ active : app.routeName == 'products_list' }"><a href="#/products/list"><i class="fa fa-angle-double-right"></i> Liste</a></li>
+							<li><a href="#/sections/list"><i class="fa fa-angle-double-right"></i> Sections</a></li>
+							<li><a href="#/categories/list"><i class="fa fa-angle-double-right"></i> Catégories</a></li>
+						</ul>
 					</li>
 					<li class="treeview active">
 					<a href="#">

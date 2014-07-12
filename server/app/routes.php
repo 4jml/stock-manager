@@ -23,6 +23,7 @@ Route::post('auth', 'UsersController@auth');
 // Public API
 Route::resource('sections', 'SectionsController');
 Route::resource('sections.categories', 'SectionsCategoriesController');
+Route::resource('categories.products', 'CategoriesProductsController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('products', 'ProductsController');
 Route::get('basket/products', 'BasketController@products');

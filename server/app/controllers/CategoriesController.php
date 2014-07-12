@@ -11,6 +11,10 @@ class CategoriesController extends \BaseController {
 	{
 		$categories = Category::all();
 
+		if (Input::has('nesting')) {
+			$categories->load('section');
+		}
+
 		return Response::json($categories);
 	}
 

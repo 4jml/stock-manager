@@ -6,6 +6,9 @@ stockManager.controller('ProductsAddController', function ($scope, $location, Re
 	Restangular.all("suppliers").getList().then(function(suppliers) {
 		$scope.suppliers = suppliers;
 	});
+	Restangular.all('sections').getList({ nesting : 1}).then(function(sections) {
+		$scope.sections = sections;
+	});
 
 	$scope.save = function() {
 		Restangular.all('products').post($scope.product, null, { suppliers : $scope.product.suppliers }).then(function() {
@@ -28,6 +31,9 @@ stockManager.controller('ProductsEditController', function ($scope, $routeParams
 	});
 	Restangular.all("suppliers").getList().then(function(suppliers) {
 		$scope.suppliers = suppliers;
+	});
+	Restangular.all('sections').getList({ nesting : 1}).then(function(sections) {
+		$scope.sections = sections;
 	});
 
 	$scope.save = function() {
