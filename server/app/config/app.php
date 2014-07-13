@@ -2,6 +2,14 @@
 
 return array(
 
+	'allowed_origins' => array(
+
+		'http://stock-manager.local',
+		'http://radian-drive.local',
+		'http://drive-manager.local',
+
+	),
+
 	/*
 	|--------------------------------------------------------------------------
 	| RADIAN DRIVE
@@ -11,7 +19,6 @@ return array(
 	|
 	*/
 
-	'drive_url' => 'http://radian-drive.local',
 	'drive_from' => 'noreply@radian-drive.fr',
 	'drive_name' => 'Radian-drive.fr',
 

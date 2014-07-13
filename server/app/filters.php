@@ -27,16 +27,11 @@ App::before(function($request)
 
 App::after(function($request, $response)
 {
-	switch($request->headers->get('radian_app'))
-	{
-		case 'radian_drive':
-			$origin = Config::get('app.drive_url');
-		break;
-		default:
-			$origin = Config::get('app.drive_url');
-	}
+	if (in_array($request->headers->get('Origin'), Config::get('app.allowed_origins')))
+		$response->headers->set('Access-Control-Allow-Origin', $request->headers->get('Origin'));
+	else
+		$response->headers->set('Access-Control-Allow-Origin', '*');
 
-	$response->headers->set('Access-Control-Allow-Origin', $origin);
 	$response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
 	$response->headers->set('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, radian_app');
 	$response->headers->set('Access-Control-Allow-Credentials', 'true');
