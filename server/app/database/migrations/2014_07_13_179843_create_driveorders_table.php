@@ -29,7 +29,7 @@ class CreateDriveOrdersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('drive_order_id')->unsigned()->index();
-			$table->foreign('drive_order_id')->references('id')->on('driveorders');
+			$table->foreign('drive_order_id')->references('id')->on('drive_orders');
 			$table->integer('product_state_id')->unsigned()->index();
 			$table->foreign('product_state_id')->references('id')->on('product_states');
 			$table->integer('quantity');
@@ -45,8 +45,8 @@ class CreateDriveOrdersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('driveorder_lines');
-		Schema::drop('driveorders');
+		Schema::drop('drive_order_lines');
+		Schema::drop('drive_orders');
 	}
 
 }
