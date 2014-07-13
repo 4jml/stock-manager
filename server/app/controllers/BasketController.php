@@ -9,7 +9,6 @@ class BasketController extends \BaseController {
 
 	public function store()
 	{
-		// Session::flush();
 		Session::push('basket', Input::all()[0]);
 		return Response::json(Session::get('basket', array()));
 	}

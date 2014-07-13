@@ -55,6 +55,8 @@ class DriveOrdersController extends \BaseController {
                 $line->save();
             }
 
+            Session::forget('basket');
+
             return Response::json($order);
         } else {
             return Response::json($validator->messages(), 400);
