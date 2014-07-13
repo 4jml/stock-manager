@@ -19,6 +19,7 @@ class CreateDriveOrdersTable extends Migration {
 			$table->foreign('customer_id')->references('id')->on('customers');
 			$table->integer('shop_id')->unsigned()->index();
 			$table->foreign('shop_id')->references('id')->on('shops');
+			$table->boolean('prepared')->default(false);
 			$table->dateTime('date');
 			$table->timestamps();
 			$table->softDeletes();
