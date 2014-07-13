@@ -133,6 +133,24 @@ stockManager.config(['$routeProvider',
 				routeTitle: 'Liste | Véhicules',
 				routeName: 'vehicules_list'
 			}).
+			when('/drive/orders/add', {
+				templateUrl: 'views/drive/orders/edit.html',
+				controller: 'DriveOrdersAddController',
+				routeTitle: 'Ajout | Commandes | radian-drive.fr',
+				routeName: 'drive/orders_add'
+			}).
+			when('/drive/orders/edit/:id', {
+				templateUrl: 'views/drive/orders/edit.html',
+				controller: 'DriveOrdersEditController',
+				routeTitle: 'Édition | Commandes | radian-drive.fr',
+				routeName: 'drive/orders_edit'
+			}).
+			when('/drive/orders/list', {
+				templateUrl: 'views/drive/orders/list.html',
+				controller: 'DriveOrdersListController',
+				routeTitle: 'Liste | Commandes | radian-drive.fr',
+				routeName: 'drive/orders_list'
+			}).
 			otherwise({
 				redirectTo: '/'
 			});

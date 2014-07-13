@@ -8,5 +8,9 @@ class DriveOrder extends Eloquent {
 	{
 		return $this->hasMany('DriveOrderLine');
 	}
+	public function customer()
+    {
+        return $this->belongsTo('Customer');
+    }
 
 }

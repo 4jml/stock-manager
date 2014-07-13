@@ -9,10 +9,11 @@ class DriveOrdersController extends \BaseController {
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = DriveOrder::all();
 
         if (Input::has('nesting')) {
             $orders->load('lines');
+            $orders->load('customer');
         }
 
         return Response::json($orders);
@@ -72,7 +73,7 @@ class DriveOrdersController extends \BaseController {
      */
     public function show($id)
     {
-        $order = Order::findOrFail($id);
+        $order = DriveOrder::findOrFail($id);
 
         if (Input::has('nesting')) {
             $order->load('orderLines');
@@ -96,7 +97,7 @@ class DriveOrdersController extends \BaseController {
         ));
 
         if ($validator->passes()) {
-            $order = Order::find($id);
+            $order = DriveOrder::find($id);
             $order->fill(Input::all());
             $order->save();
 
@@ -115,7 +116,7 @@ class DriveOrdersController extends \BaseController {
      */
     public function destroy($id)
     {
-        Order::destroy($id);
+        DriveOrder::destroy($id);
         return Response::make();
     }
 
