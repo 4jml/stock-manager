@@ -27,8 +27,8 @@ class CreateDriveOrdersTable extends Migration {
 		Schema::create('drive_order_lines', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('driveorder_id')->unsigned()->index();
-			$table->foreign('driveorder_id')->references('id')->on('driveorders');
+			$table->integer('drive_order_id')->unsigned()->index();
+			$table->foreign('drive_order_id')->references('id')->on('driveorders');
 			$table->integer('product_state_id')->unsigned()->index();
 			$table->foreign('product_state_id')->references('id')->on('product_states');
 			$table->integer('quantity');
