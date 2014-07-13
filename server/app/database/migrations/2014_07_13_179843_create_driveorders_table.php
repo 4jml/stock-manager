@@ -1,0 +1,51 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class CreateDriveOrdersTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('drive_orders', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->integer('customer_id')->unsigned()->index();
+			$table->foreign('customer_id')->references('id')->on('customers');
+			$table->integer('shop_id')->unsigned()->index();
+			$table->foreign('shop_id')->references('id')->on('shops');
+			$table->dateTime('date');
+			$table->timestamps();
+			$table->softDeletes();
+		});
+
+		Schema::create('drive_order_lines', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->integer('driveorder_id')->unsigned()->index();
+			$table->foreign('driveorder_id')->references('id')->on('driveorders');
+			$table->integer('product_state_id')->unsigned()->index();
+			$table->foreign('product_state_id')->references('id')->on('product_states');
+			$table->integer('quantity');
+			$table->timestamps();
+		});
+	}
+
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('driveorder_lines');
+		Schema::drop('driveorders');
+	}
+
+}
