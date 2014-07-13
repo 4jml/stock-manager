@@ -42,6 +42,7 @@ class CreateOrdersTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::drop('order_lines');
 		Schema::drop('orders');
 	}
 
