@@ -66,6 +66,7 @@ class DriveOrdersController extends \BaseController {
             $order->shop_id = Input::get('shop_id');
             $order->customer_id = Auth::user()->id;
             $order->date = Input::get('date');
+            $order->reference = strtoupper(substr(Auth::user()->lastname, 0, 2)) . \Carbon\Carbon::now()->format('dm') . rand(1000, 9999);
             $order->save();
 
             $products_cleaned = array_unique(Session::get('basket', array()));
