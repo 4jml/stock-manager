@@ -13,14 +13,9 @@
 
 App::before(function($request)
 {
-	switch(in_array($request->headers->get('Origin'), Config::get('app.allowed_origins')))
-	{
-		case 'radian_drive':
-		{
-			Config::set('auth.model', 'Customer');
-			Config::set('auth.table', 'customers');
-		}
-		break;
+	if (strstr($request->headers->get('Origin'), 'radian-drive')) {
+		Config::set('auth.model', 'Customer');
+		Config::set('auth.table', 'customers');
 	}
 });
 
