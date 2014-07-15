@@ -65,8 +65,16 @@ class DriveOrdersController extends \BaseController {
             $order = new DriveOrder;
             $order->shop_id = Input::get('shop_id');
             $order->customer_id = Auth::user()->id;
-            $order->date = Input::get('date');
-            $order->reference = strtoupper(substr(Auth::user()->lastname, 0, 2)) . \Carbon\Carbon::now()->format('dm') . rand(1000, 9999);
+            $order->date = Carbon::parse(Input::get('date'));
+            $order->reference = strtoupper(substr(Auth::user()->lastname, 0, 2)) . Carbon::now()->format('dm') . rand(1000, 9999);
+
+            while ($order->code == NULL) {
+                $code = rand(1000, 9999);
+                $count = DriveOrder::where('code', $code)->where('date', 'LIKE', $order->date->format('Y-m-d') . '%')->count();
+                if (! $count)
+                    $order->code = $code;
+            }
+
             $order->save();
 
             $products_cleaned = array_unique(Session::get('basket', array()));
