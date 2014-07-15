@@ -59,7 +59,7 @@ class DriveOrdersController extends \BaseController {
 
         $validator = Validator::make(Input::all(), array(
             'shop_id' => 'required',
-        ));
+            ));
 
         if ($validator->passes()) {
             $order = new DriveOrder;
@@ -84,6 +84,20 @@ class DriveOrdersController extends \BaseController {
             }
 
             Session::forget('basket');
+
+            $order = DriveOrder::find($order->id);
+            $order->load('lines');
+            $order->load('lines.productState');
+            $order->load('customer');
+            $order->load('user');
+            $email = $order->customer->email;
+
+            Mail::send('emails.drive.order', array('order' => $order), function($message) use ($email)
+            {
+                $message->from(Config::get('app.drive_from'), Config::get('app.drive_name'));
+                $message->to($email);
+                $message->setSubject("Validation de votre commande");
+            });
 
             return Response::json($order);
         } else {
@@ -135,7 +149,7 @@ class DriveOrdersController extends \BaseController {
         $validator = Validator::make(Input::all(), array(
             'supplier_id' => 'exists:suppliers',
             'validated' => 'boolean'
-        ));
+            ));
 
         if ($validator->passes()) {
             $order = DriveOrder::find($id);
