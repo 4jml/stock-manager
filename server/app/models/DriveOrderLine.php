@@ -2,11 +2,15 @@
 
 class DriveOrderLine extends Eloquent {
 
-	protected $fillable = array('driveorder_id', 'product_state_id', 'quantity');
+	protected $fillable = array('quantity', 'prepared');
 
     public function order()
     {
         return $this->belongsTo('DriveOrder');
+    }
+    public function productState()
+    {
+        return $this->belongsTo('ProductState');
     }
 
 }

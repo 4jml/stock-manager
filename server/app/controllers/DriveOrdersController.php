@@ -9,11 +9,37 @@ class DriveOrdersController extends \BaseController {
      */
     public function index()
     {
-        $orders = DriveOrder::all();
+        $orders = DriveOrder::where(function($query) {
+            if (Input::has('prepare')) {
+                $query->whereNull('user_id');
+            }
+            if (Input::has('preparing')) {
+                $query->whereNotNull('user_id')->where('prepared', false);
+            }
+            if (Input::has('prepared')) {
+                $query->where('prepared', true);
+            }
+        })
+        ->get();
 
         if (Input::has('nesting')) {
             $orders->load('lines');
+            $orders->load('lines.productState');
             $orders->load('customer');
+            $orders->load('user');
+
+            foreach ($orders as $order) {
+                $total = 0;
+                $quantity = 0;
+
+                foreach ($order->lines as $line) {
+                    $total += $line->productState->price;
+                    $quantity += $line->quantity;
+                }
+
+                $order->total = $total;
+                $order->quantity = $quantity;
+            }
         }
 
         return Response::json($orders);
@@ -50,7 +76,7 @@ class DriveOrdersController extends \BaseController {
                 $product = Product::find($entry);
                 $product->quantity = count(array_keys(Session::get('basket', array()), $entry));
                 $line = new DriveOrderLine;
-                $line->driveorder_id = $order->id;
+                $line->drive_order_id = $order->id;
                 $line->product_state_id = $product->state()->id;
                 $line->quantity = $product->quantity;
                 $line->save();
@@ -76,7 +102,21 @@ class DriveOrdersController extends \BaseController {
         $order = DriveOrder::findOrFail($id);
 
         if (Input::has('nesting')) {
-            $order->load('orderLines');
+            $order->load('lines');
+            $order->load('lines.productState');
+            $order->load('customer');
+            $order->load('user');
+
+            $total = 0;
+            $quantity = 0;
+
+            foreach ($order->lines as $line) {
+                $total += $line->productState->price;
+                $quantity += $line->quantity;
+            }
+
+            $order->total = $total;
+            $order->quantity = $quantity;
         }
 
         return Response::json($order);

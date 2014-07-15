@@ -55,6 +55,8 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('orders', 'OrdersController');
 	Route::resource('orders.lines', 'OrderLinesController');
 
+	Route::resource('drive/orderlines', 'DriveOrderLinesController');
+
 	Route::resource('central/stocks', 'CentralStocksController');
 	Route::resource('central/stocks/logs', 'CentralStockLogsController');
 

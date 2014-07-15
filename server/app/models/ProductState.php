@@ -6,4 +6,8 @@ class ProductState extends Product {
     public $timestamps = false;
     protected $table = 'product_states';
 
+    public function driveorderline()
+    {
+        return $this->belongsTo('DriveOrderLine');
+    }
 }

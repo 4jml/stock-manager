@@ -2,7 +2,7 @@
 
 class DriveOrder extends Eloquent {
 
-	protected $fillable = array('customer_id', 'shop_id', 'date');
+	protected $fillable = array('customer_id', 'user_id', 'shop_id', 'date', 'prepared');
 
 	public function lines()
 	{
@@ -11,6 +11,10 @@ class DriveOrder extends Eloquent {
 	public function customer()
     {
         return $this->belongsTo('Customer');
+    }
+	public function user()
+    {
+        return $this->belongsTo('User');
     }
 
 }
