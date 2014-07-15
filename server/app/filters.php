@@ -13,7 +13,7 @@
 
 App::before(function($request)
 {
-	switch($request->headers->get('radian_app'))
+	switch(in_array($request->headers->get('Origin'), Config::get('app.allowed_origins')))
 	{
 		case 'radian_drive':
 		{
