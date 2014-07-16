@@ -43,6 +43,24 @@ stockManager.config(['$routeProvider',
 				routeTitle: 'Centrale d\'achat',
 				routeName: 'central'
 			}).
+			when('/suppliers/add', {
+				templateUrl: 'views/suppliers/edit.html',
+				controller: 'SuppliersAddController',
+				routeTitle: 'Ajout | Fournisseurs',
+				routeName: 'suppliers_add'
+			}).
+			when('/suppliers/edit/:id', {
+				templateUrl: 'views/suppliers/edit.html',
+				controller: 'SuppliersEditController',
+				routeTitle: 'Édition | Fournisseurs',
+				routeName: 'suppliers_edit'
+			}).
+			when('/suppliers/list', {
+				templateUrl: 'views/suppliers/list.html',
+				controller: 'SuppliersListController',
+				routeTitle: 'Liste | Fournisseurs',
+				routeName: 'suppliers_list'
+			}).
 			when('/products/add', {
 				templateUrl: 'views/products/edit.html',
 				controller: 'ProductsAddController',

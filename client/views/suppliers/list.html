@@ -16,32 +16,32 @@
 				<div class="box-header">
 					<h3 class="box-title">Liste des fournisseurs</h3>
 					<div class="pull-right box-tools">
-						<a href="#/products/add" class="btn btn-success"><span class="fa fa-plus"></span> Ajouter</a>
+						<a href="#/suppliers/add" class="btn btn-success"><span class="fa fa-plus"></span> Ajouter</a>
 					</div>
 				</div>
 				<div class="box-body table-responsive">
-					<table id="products_table" class="table table-hover table-striped" datatable watch="products">
+					<table id="suppliers_table" class="table table-hover table-striped" datatable watch="suppliers">
 						<thead>
 							<tr>
 								<th>#</th>
 								<th>Nom</th>
-								<th>Description</th>
-								<th>Prix</th>
-								<th>Poids</th>
-								<th>Code barre</th>
+								<th>Adresse</th>
+								<th>Code postal</th>
+								<th>Ville</th>
+								<th>Téléphone</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="product in products">
-								<td>{{ product.id }}</td>
-								<td>{{ product.name }}</td>
-								<td>{{ product.description }}</td>
-								<td>{{ product.price }}</td>
-								<td>{{ product.weight }}</td>
-								<td>{{ product.barcode }}</td>
+							<tr ng-repeat="supplier in suppliers">
+								<td>{{ supplier.id }}</td>
+								<td>{{ supplier.name }}</td>
+								<td>{{ supplier.address }}</td>
+								<td>{{ supplier.zip }}</td>
+								<td>{{ supplier.city }}</td>
+								<td>{{ supplier.phone }}</td>
 								<td>
-									<a href="#/products/edit/{{ product.id }}" class="btn btn-primary btn-xs"><span class="fa fa-pencil"></span></a>
+									<a href="#/suppliers/edit/{{ supplier.id }}" class="btn btn-primary btn-xs"><span class="fa fa-pencil"></span></a>
 									<button ng-click="delete($index)" class="btn btn-danger btn-xs"><span class="fa fa-trash-o"></span></button>
 								</td>
 							</tr>
