@@ -2,7 +2,7 @@
 
 class DriveOrderLine extends Eloquent {
 
-	protected $fillable = array('quantity', 'prepared');
+	protected $fillable = array('quantity', 'availableQuantity');
 
     public function order()
     {

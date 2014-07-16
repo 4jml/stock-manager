@@ -11,8 +11,7 @@ class DriveOrderLinesController extends \BaseController {
     public function update($id)
     {
         $line = DriveOrderLine::find($id);
-        $line->quantity = Input::get('quantity');
-        $line->prepared = Input::get('prepared');
+        $line->fill(Input::all());
         $line->save();
 
         return Response::json($line);

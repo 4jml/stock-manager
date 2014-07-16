@@ -18,6 +18,14 @@ class DriveOrdersController extends \BaseController {
             }
             if (Input::has('prepared')) {
                 $query->where('prepared', true);
+                $query->where('delivered', false);
+                $query->where('canceled', false);
+            }
+            if (Input::has('delivered')) {
+                $query->where('delivered', true);
+            }
+            if (Input::has('canceled')) {
+                $query->where('canceled', true);
             }
         })
         ->get();
@@ -33,8 +41,8 @@ class DriveOrdersController extends \BaseController {
                 $quantity = 0;
 
                 foreach ($order->lines as $line) {
-                    $total += $line->productState->price;
-                    $quantity += $line->quantity;
+                    $total += $line->productState->price * $line->availableQuantity;
+                    $quantity += $line->availableQuantity;
                 }
 
                 $order->total = $total;
@@ -88,6 +96,7 @@ class DriveOrdersController extends \BaseController {
                 $line->drive_order_id = $order->id;
                 $line->product_state_id = $product->state()->id;
                 $line->quantity = $product->quantity;
+                $line->availableQuantity = $product->quantity;
                 $line->save();
             }
 
@@ -134,8 +143,8 @@ class DriveOrdersController extends \BaseController {
             $quantity = 0;
 
             foreach ($order->lines as $line) {
-                $total += $line->productState->price;
-                $quantity += $line->quantity;
+                $total += $line->productState->price * $line->availableQuantity;
+                $quantity += $line->availableQuantity;
             }
 
             $order->total = $total;
@@ -193,6 +202,31 @@ class DriveOrdersController extends \BaseController {
     public function search($query)
     {
         //
+    }
+
+    public function code($code)
+    {
+        $order = DriveOrder::where('code', $code)->firstOrFail();
+
+        if (Input::has('nesting')) {
+            $order->load('lines');
+            $order->load('lines.productState');
+            $order->load('customer');
+            $order->load('user');
+
+            $total = 0;
+            $quantity = 0;
+
+            foreach ($order->lines as $line) {
+                $total += $line->productState->price * $line->availableQuantity;
+                $quantity += $line->availableQuantity;
+            }
+
+            $order->total = $total;
+            $order->quantity = $quantity;
+        }
+
+        return Response::json($order);
     }
 
 }

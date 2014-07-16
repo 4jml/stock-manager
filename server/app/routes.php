@@ -34,6 +34,7 @@ Route::get('customers/disconnect', 'CustomersController@disconnect');
 Route::get('customers/check/{email}', 'CustomersController@check');
 Route::resource('customers', 'CustomersController');
 Route::resource('drive/orders', 'DriveOrdersController');
+Route::get('drive/orders/bycode/{code}', 'DriveOrdersController@code');
 
 // All the routes that require authentication
 Route::group(array('before' => 'auth'), function()

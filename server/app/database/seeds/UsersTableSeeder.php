@@ -8,6 +8,10 @@ class UsersTableSeeder extends Seeder {
 			'username' => 'admin',
 			'password' => Hash::make('test')
 		));
+		User::create(array(
+			'username' => 'driveDeliver',
+			'password' => Hash::make('test')
+		));
 	}
 
 }

@@ -2,7 +2,7 @@
 
 class DriveOrder extends Eloquent {
 
-	protected $fillable = array('customer_id', 'user_id', 'shop_id', 'date', 'prepared');
+	protected $fillable = array('customer_id', 'user_id', 'shop_id', 'date', 'prepared', 'canceled', 'delivered');
 
 	public function lines()
 	{
