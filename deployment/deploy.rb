@@ -10,7 +10,7 @@ set :pty, true
 
 set :composer_install_flags, '--no-dev --prefer-dist --no-interaction --optimize-autoloader'
 set :linked_files, %w{}
-set :linked_dirs, %w{server/app/config/production}
+set :linked_dirs, %w{server/app/config/production server/public/data}
 
 before 'deploy:starting', 'laravel:parameters'
 after 'deploy:updated', 'laravel:migration'

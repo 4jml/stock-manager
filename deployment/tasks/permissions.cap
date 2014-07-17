@@ -3,6 +3,7 @@ namespace :laravel do
 	task :permissions do
 		on roles(:app) do
 			execute "chmod -R 777 #{fetch(:release_path)}/server/app/storage/"
+			execute "chmod -R 777 #{fetch(:release_path)}/server/public/data/"
 		end
 	end
 end
