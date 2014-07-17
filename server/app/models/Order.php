@@ -11,4 +11,9 @@ class Order extends Eloquent {
 		return $this->hasMany('OrderLine');
 	}
 
+    public function supplier()
+    {
+        return $this->belongsTo('Supplier');
+    }
+
 }

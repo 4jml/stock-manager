@@ -12,7 +12,7 @@ class OrdersController extends \BaseController {
         $orders = Order::all();
 
         if (Input::has('nesting')) {
-            $orders->load('orderLines');
+            $orders->load('supplier', 'orderLines');
         }
 
         return Response::json($orders);
@@ -27,8 +27,7 @@ class OrdersController extends \BaseController {
     public function store()
     {
         $validator = Validator::make(Input::all(), array(
-            'supplier_id' => 'required|exists:suppliers,id',
-            'validated' => 'boolean'
+            'supplier_id' => 'required|exists:suppliers,id'
         ));
 
         if ($validator->passes()) {
@@ -51,7 +50,7 @@ class OrdersController extends \BaseController {
         $order = Order::findOrFail($id);
 
         if (Input::has('nesting')) {
-            $order->load('orderLines');
+            $order->load('supplier', 'orderLines', 'orderLines.productState');
         }
 
         return Response::json($order);
@@ -67,12 +66,12 @@ class OrdersController extends \BaseController {
     public function update($id)
     {
         $validator = Validator::make(Input::all(), array(
-            'supplier_id' => 'exists:suppliers',
-            'validated' => 'boolean'
+            'supplier_id' => 'exists:suppliers,id'
         ));
 
-        if ($validator->passes()) {
-            $order = Order::find($id);
+        $order = Order::find($id);
+
+        if ($validator->passes() && !$order->validated) {
             $order->fill(Input::all());
             $order->save();
 
@@ -91,8 +90,14 @@ class OrdersController extends \BaseController {
      */
     public function destroy($id)
     {
-        Order::destroy($id);
-        return Response::make();
+        $order = Order::find($id);
+
+        if (!$order->validated) {
+            Order::destroy($id);
+            return Response::make();
+        } else {
+            return Response::json(null, 400);
+        }
     }
 
 

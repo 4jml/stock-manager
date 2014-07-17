@@ -29,7 +29,9 @@ class OrderLinesController extends \BaseController {
             'quantity' => 'required|integer'
         ));
 
-        if ($validator->passes()) {
+        $order = Order::findOrFail($orderId);
+
+        if ($validator->passes() && !$order->validated) {
             $orderLine = new OrderLine;
             $orderLine->fill($inputs);
 
@@ -52,12 +54,18 @@ class OrderLinesController extends \BaseController {
     public function update($orderId, $orderLineId)
     {
         $validator = Validator::make(Input::all(), array(
+            'product_id' => 'required|integer',
             'quantity' => 'required|integer'
         ));
 
-        if ($validator->passes()) {
+        $order = Order::findOrFail($orderId);
+
+        if ($validator->passes()  && !$order->validated) {
             $orderLine = OrderLine::findOrFail($orderLineId);
-            $orderLine->quantity = Input::get('quantity');
+            $orderLine->fill(Input::all());
+
+            $productState = Product::findOrFail(Input::get('product_id'))->state();
+            $orderLine->product_state_id = $productState->id;
             $orderLine->save();
 
             return Response::json($orderLine);
@@ -75,7 +83,11 @@ class OrderLinesController extends \BaseController {
      */
     public function destroy($orderId, $orderLineId)
     {
-        OrderLine::destroy($orderLineId);
+        $order = Order::findOrFail($orderId);
+
+        if (!$order->validated) {
+            OrderLine::destroy($orderLineId);
+        }
     }
 
 }

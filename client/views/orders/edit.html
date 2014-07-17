@@ -1,0 +1,112 @@
+<section class="content-header">
+	<h1>
+		Commandes
+		<small>{{ title }}</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+		<li><a href="#/orders/list">Commandes</a></li>
+		<li class="active">{{ title }}</li>
+	</ol>
+</section>
+
+<section class="content">
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">
+						{{ title }} :
+						<span ng-if="newEntity">Nouvelle commande</span>
+						<span ng-if="!newEntity">Commande #<strong>{{ order.id }}</strong></span>
+					</h3>
+				</div><!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" ng-submit="save()">
+					<div class="box-body">
+						<div class="form-group">
+							<label>Fournisseur</label>
+							<select name="suppliers" class="form-control" ng-model="order.supplier_id" ng-options="supplier.id as supplier.name for supplier in suppliers">
+							</select>
+						</div>
+						<div class="form-group" ng-if="!newEntity">
+							<label>
+								<input type="checkbox" ng-model="order.validated" ng-checked="order.validated == 1">
+								Validée
+							</label>
+						</div>
+					</div><!-- /.box-body -->
+					<div class="box-footer">
+						<button type="submit" class="btn btn-success"><span class="fa fa-floppy-o"></span> Enregistrer</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="box box-primary" ng-controller="OrderLinesController" ng-show="displayed">
+				<div class="box-header">
+					<h3 class="box-title">
+						{{ title }} :
+						<span ng-if="newEntity || !line.id">Nouvelle ligne</span>
+						<span ng-if="!newEntity && line.id">Ligne #<strong>{{ line.id }}</strong></span>
+					</h3>
+				</div><!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" ng-submit="save()">
+					<div class="box-body">
+						<div class="form-group">
+							<label>Produit</label>
+							<select name="suppliers" class="form-control" ng-model="line.product_id" ng-options="product.id as product.name for product in products">
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Quantité</label>
+							<input type="number" class="form-control" ng-model="line.quantity">
+						</div>
+					</div><!-- /.box-body -->
+					<div class="box-footer">
+						<button type="submit" class="btn btn-success"><span class="fa fa-floppy-o"></span> Enregistrer</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="col-lg-6">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Lignes de la commande</h3>
+					<div order-lines-actions class="pull-right box-tools">
+						<button ng-click="add()" class="btn btn-success"><span class="fa fa-plus"></span> Ajouter</button>
+					</div>
+				</div><!-- /.box-header -->
+				<div class="box-body table-responsive">
+					<table id="order_lines_table" class="table table-hover table-striped">
+						<thead>
+							<tr>
+								<th ng-if="!newEntity">#</th>
+								<th>Produit</th>
+								<th>Quantité</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="line in order.order_lines">
+								<td ng-if="!newEntity">{{ line.id }}</td>
+								<td ng-if="line.product_state">{{ line.product_state.name }}</td>
+								<td ng-if="!line.product_state">
+									<span ng-repeat="product in products | filter:{ id: line.product_id }">
+										{{ product.name }}
+									</span>
+								</td>
+								<td>{{ line.quantity }}</td>
+								<td order-lines-actions>
+									<button ng-click="edit(line)" class="btn btn-primary btn-xs"><span class="fa fa-pencil"></span></button>
+									<button ng-click="delete(line)" class="btn btn-danger btn-xs"><span class="fa fa-trash-o"></span></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section><!-- /.content -->

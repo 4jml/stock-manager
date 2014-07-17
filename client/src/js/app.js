@@ -61,6 +61,24 @@ stockManager.config(['$routeProvider',
 				routeTitle: 'Liste | Fournisseurs',
 				routeName: 'suppliers_list'
 			}).
+			when('/orders/add', {
+				templateUrl: 'views/orders/edit.html',
+				controller: 'OrdersAddController',
+				routeTitle: 'Ajout | Commandes | Fournisseurs',
+				routeName: 'orders_add'
+			}).
+			when('/orders/edit/:id', {
+				templateUrl: 'views/orders/edit.html',
+				controller: 'OrdersEditController',
+				routeTitle: 'Édition | Commandes | Fournisseurs',
+				routeName: 'orders_edit'
+			}).
+			when('/orders/list', {
+				templateUrl: 'views/orders/list.html',
+				controller: 'OrdersListController',
+				routeTitle: 'Liste | Commandes | Fournisseurs',
+				routeName: 'orders_list'
+			}).
 			when('/products/add', {
 				templateUrl: 'views/products/edit.html',
 				controller: 'ProductsAddController',
