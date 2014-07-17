@@ -46,6 +46,7 @@ Route::group(array('before' => 'auth'), function()
 
 	Route::resource('products.suppliers', 'ProductsSuppliersController');
 	Route::resource('products.stocks', 'ProductsStocksController');
+	Route::post('products/{id}/image', 'ProductsController@image');
 
     Route::resource('suppliers', 'SuppliersController');
 	Route::resource('suppliers.products', 'SuppliersProductsController');
@@ -60,6 +61,9 @@ Route::group(array('before' => 'auth'), function()
 
 	Route::resource('central/stocks', 'CentralStocksController');
 	Route::resource('central/stocks/logs', 'CentralStockLogsController');
+
+	// Statistics
+	Route::controller('drive/statistics', 'DriveOrdersStatisticsController');
 
 	// Search engine
 	Route::get('shops/search/{query}', 'ShopsController@search');

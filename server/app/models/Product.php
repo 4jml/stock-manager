@@ -24,4 +24,8 @@ class Product extends Eloquent {
         // Create, if necessary, the state and return it.
         return ProductState::firstOrCreate($data);
     }
+
+    public function getImageAttribute() {
+        return URL::to('/') . '/data/' . $this->attributes['image'];
+    }
 }

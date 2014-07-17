@@ -8,3 +8,9 @@ stockManager.controller('DriveOrdersViewController', function ($scope, $routePar
 		$scope.order = order;
 	});
 });
+stockManager.controller('DriveOrdersStatisticsController', function ($scope, Restangular) {
+	$scope.ordersCount = Restangular.one('drive/statistics/orders-count').get().$object;
+	$scope.ordersRevenue = Restangular.one('drive/statistics/orders-revenue').get().$object;
+	$scope.customersCount = Restangular.one('drive/statistics/customers-count').get().$object;
+	$scope.deliveredPercent = Restangular.one('drive/statistics/delivered-percent').get().$object;
+});

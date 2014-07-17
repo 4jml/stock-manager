@@ -37,8 +37,14 @@ stockManager.controller('ProductsEditController', function ($scope, $routeParams
 	});
 
 	$scope.save = function() {
-		$scope.product.put({ suppliers : $scope.product.suppliers });
+		$scope.product.put();
 		Restangular.one('products', $scope.product.id).all('suppliers').post($scope.product.suppliers);
+		var data = new FormData();
+		data.append('image', $('input[name="image"]')[0].files[0]);
+		Restangular.one('products', $scope.product.id)
+		.all('image')
+		.withHttpConfig({transformRequest: angular.identity})
+		.customPOST(data, undefined, {}, {'Content-Type': undefined});
 	};
 });
 

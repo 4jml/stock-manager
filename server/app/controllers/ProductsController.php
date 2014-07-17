@@ -77,6 +77,8 @@ class ProductsController extends \BaseController {
 			'barcode' => 'alpha_num'
 		));
 
+		var_dump(Input::hasFile('image'));
+
 		if ($validator->passes()) {
 			$product = Product::find($id);
 			$product->fill(Input::all());
@@ -120,6 +122,24 @@ class ProductsController extends \BaseController {
 						   ->get();
 
 		return Response::json($products);
+	}
+
+	public function image($id)
+	{
+		$product = Product::find($id);
+		if (Input::file('image')) {
+			$extension = Input::file('image')->getClientOriginalExtension();
+			$fileName = uniqid() . '.' . $extension;
+			$destinationPath = public_path().'/data/';
+			Input::file('image')->move($destinationPath, $fileName);
+			$product->image = $fileName;
+		}
+		else {
+			$product->image = null;
+		}
+		$product->save();
+
+		return Response::json($product);
 	}
 
 }

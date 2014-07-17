@@ -187,6 +187,12 @@ stockManager.config(['$routeProvider',
 				routeTitle: 'Liste | Commandes | radian-drive.fr',
 				routeName: 'drive/orders_list'
 			}).
+			when('/drive/orders/statistics', {
+				templateUrl: 'views/drive/orders/statistics.html',
+				controller: 'DriveOrdersStatisticsController',
+				routeTitle: 'Statistiques | Commandes | radian-drive.fr',
+				routeName: 'drive/orders_statistics'
+			}).
 			when('/drive/orders/:id', {
 				templateUrl: 'views/drive/orders/view.html',
 				controller: 'DriveOrdersViewController',
