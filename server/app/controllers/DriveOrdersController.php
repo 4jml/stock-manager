@@ -94,6 +94,7 @@ class DriveOrdersController extends \BaseController {
                 $product->quantity = count(array_keys(Session::get('basket', array()), $entry));
                 $line = new DriveOrderLine;
                 $line->drive_order_id = $order->id;
+                $line->product_id = $product->id;
                 $line->product_state_id = $product->state()->id;
                 $line->quantity = $product->quantity;
                 $line->availableQuantity = $product->quantity;
@@ -166,12 +167,35 @@ class DriveOrdersController extends \BaseController {
         $validator = Validator::make(Input::all(), array(
             'supplier_id' => 'exists:suppliers',
             'validated' => 'boolean'
-            ));
+        ));
 
         if ($validator->passes()) {
-            $order = DriveOrder::find($id);
+            $order = DriveOrder::findOrFail($id);
             $order->fill(Input::all());
             $order->save();
+
+            if (Input::get('delivered')) {
+                $lines = DriveOrderLine::where('drive_order_id', '=', $order->id)->get();
+
+                foreach ($lines as $line) {
+                    // Update the stock.
+                    $outStock = Stock::where('product_id', '=', $line->product_id)->first();
+                    $outStock = ($outStock == null) ? new Stock : $outStock;
+                    $outStock->shop_id = $order->shop_id;
+                    $outStock->product_id = $line->product_id;
+                    $outStock->quantity -= $line->quantity;
+                    $outStock->save();
+
+                    // Update the logs.
+                    $outLog = new StockLog;
+                    $outLog->shop_id = $order->shop_id;
+                    $outLog->product_id = $line->product_id;
+                    $outLog->user_id = Auth::user()->id;
+                    $outLog->lot = substr(strtoupper(md5(time() + rand(0, 1000))), 0, 14);
+                    $outLog->quantity = -$line->quantity;
+                    $outLog->save();
+                }
+            }
 
             return Response::json($order);
         } else {
