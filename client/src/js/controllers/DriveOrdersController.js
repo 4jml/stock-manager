@@ -3,3 +3,8 @@ stockManager.controller('DriveOrdersListController', function ($scope, $route, R
 		$scope.orders = orders;
 	});
 });
+stockManager.controller('DriveOrdersViewController', function ($scope, $routeParams, Restangular) {
+	Restangular.one('drive/orders', $routeParams.id).get({ nesting : 1 }).then(function(order) {
+		$scope.order = order;
+	});
+});

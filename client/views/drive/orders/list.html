@@ -15,9 +15,6 @@
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">Liste des commandes</h3>
-					<div class="pull-right box-tools">
-						<a href="#/drive/orders/add" class="btn btn-success"><span class="fa fa-plus"></span> Ajouter</a>
-					</div>
 				</div>
 				<div class="box-body table-responsive">
 					<table id="orders_table" class="table table-hover table-striped" datatable watch="orders">
@@ -25,14 +22,22 @@
 							<tr>
 								<th>#</th>
 								<th>Nom</th>
+								<th>Référence</th>
 								<th>Date</th>
+								<th>Total</th>
+								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="order in orders">
 								<td>{{ order.id }}</td>
+								<td><strong>{{ order.reference }}</strong></td>
 								<td><strong>{{ order.customer.lastname }} {{ order.customer.firstname }}</strong></td>
 								<td>{{ order.date }}</td>
+								<td>{{ order.total }}</td>
+								<td>
+									<a href="#/drive/orders/{{ order.id }}" class="btn btn-primary btn-xs"><span class="fa fa-eye"></span></a>
+								</td>
 							</tr>
 						</tbody>
 					</table>
