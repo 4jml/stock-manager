@@ -25,6 +25,7 @@ Route::resource('sections', 'SectionsController');
 Route::resource('sections.categories', 'SectionsCategoriesController');
 Route::resource('categories.products', 'CategoriesProductsController');
 Route::resource('categories', 'CategoriesController');
+Route::get('products/barcode/{barcode}', 'ProductsController@barcode');
 Route::resource('products', 'ProductsController');
 Route::get('basket/products', 'BasketController@products');
 Route::resource('basket', 'BasketController');

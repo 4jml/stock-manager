@@ -142,4 +142,9 @@ class ProductsController extends \BaseController {
 		return Response::json($product);
 	}
 
+	public function barcode($barcode) {
+		$product = Product::where('barcode', $barcode)->firstOrFail();
+
+		return Response::json($product);
+	}
 }
