@@ -1,11 +1,11 @@
 <section class="content-header">
 	<h1>
-		Commandes
+		Transports
 		<small>{{ title }}</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-		<li><a href="#/orders/list">Commandes</a></li>
+		<li><a href="#/transports/list">Transports</a></li>
 		<li class="active">{{ title }}</li>
 	</ol>
 </section>
@@ -17,21 +17,46 @@
 				<div class="box-header">
 					<h3 class="box-title">
 						{{ title }} :
-						<span ng-if="newEntity">Nouvelle commande</span>
-						<span ng-if="!newEntity">Commande #<strong>{{ order.id }}</strong></span>
+						<span ng-if="newEntity">Nouveau transport</span>
+						<span ng-if="!newEntity">Transport #<strong>{{ transport.id }}</strong></span>
 					</h3>
 				</div><!-- /.box-header -->
 				<!-- form start -->
 				<form role="form" ng-submit="save()">
 					<div class="box-body">
 						<div class="form-group">
-							<label>Fournisseur</label>
-							<select name="suppliers" class="form-control" ng-model="order.supplier_id" ng-options="supplier.id as supplier.name for supplier in suppliers">
+							<label>Conducteur</label>
+							<select class="form-control" ng-model="transport.driver_id" ng-options="driver.id as (driver.lastname +' '+ driver.firstname) for driver in drivers">
 							</select>
+						</div>
+						<div class="form-group">
+							<label>Véhicule</label>
+							<select class="form-control" ng-model="transport.vehicule_id" ng-options="vehicule.id as vehicule.plate for vehicule in vehicules">
+							<option>Stock central</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Stock de départ (laisser vide pour le stock central)</label>
+							<select class="form-control" ng-model="transport.departure" ng-options="shop.id as shop.name for shop in shops">
+							<option>Stock central</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Stock d'arrivée (laisser vide pour le stock central)</label>
+							<select class="form-control" ng-model="transport.arrival" ng-options="shop.id as shop.name for shop in shops">
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Date de départ</label>
+							<input type="text" class="form-control" ng-model="transport.start" value="{{ transport.start }}" placeholder="AAAA-MM-JJ HH:MM:SS">
+						</div>
+						<div class="form-group">
+							<label>Date d'arrivée</label>
+							<input type="text" class="form-control" ng-model="transport.end" value="{{ transport.end }}" placeholder="AAAA-MM-JJ HH:MM:SS">
 						</div>
 						<div class="form-group" ng-if="!newEntity">
 							<label>
-								<input type="checkbox" ng-model="order.validated" ng-checked="order.validated == 1">
+								<input type="checkbox" ng-model="transport.validated" ng-checked="transport.validated == 1">
 								Validée
 							</label>
 						</div>
@@ -44,7 +69,7 @@
 		</div>
 
 		<div class="col-lg-6">
-			<div class="box box-primary" ng-controller="OrderLinesController" ng-show="displayed">
+			<div class="box box-primary" ng-controller="TransportLinesController" ng-show="displayed">
 				<div class="box-header">
 					<h3 class="box-title">
 						{{ title }} :
@@ -73,13 +98,13 @@
 
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title">Lignes de la commande</h3>
-					<div order-lines-actions class="pull-right box-tools">
+					<h3 class="box-title">Lignes du transport</h3>
+					<div transport-lines-actions class="pull-right box-tools">
 						<button ng-click="add()" class="btn btn-success"><span class="fa fa-plus"></span> Ajouter</button>
 					</div>
 				</div><!-- /.box-header -->
 				<div class="box-body table-responsive">
-					<table id="order_lines_table" class="table table-hover table-striped">
+					<table id="transport_lines_table" class="table table-hover table-striped">
 						<thead>
 							<tr>
 								<th ng-if="!newEntity">#</th>
@@ -89,7 +114,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="line in order.order_lines">
+							<tr ng-repeat="line in transport.transport_lines">
 								<td ng-if="!newEntity">{{ line.id }}</td>
 								<td ng-if="line.product_state">{{ line.product_state.name }}</td>
 								<td ng-if="!line.product_state">
@@ -98,7 +123,7 @@
 									</span>
 								</td>
 								<td>{{ line.quantity }}</td>
-								<td order-lines-actions>
+								<td transport-lines-actions>
 									<button ng-click="edit(line)" class="btn btn-primary btn-xs"><span class="fa fa-pencil"></span></button>
 									<button ng-click="delete(line)" class="btn btn-danger btn-xs"><span class="fa fa-trash-o"></span></button>
 								</td>

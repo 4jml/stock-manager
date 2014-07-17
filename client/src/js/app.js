@@ -133,6 +133,24 @@ stockManager.config(['$routeProvider',
 				routeTitle: 'Liste | Catégories',
 				routeName: 'categories_list'
 			}).
+			when('/transports/add', {
+				templateUrl: 'views/transports/edit.html',
+				controller: 'TransportsAddController',
+				routeTitle: 'Ajout | Transports',
+				routeName: 'transports_add'
+			}).
+			when('/transports/edit/:id', {
+				templateUrl: 'views/transports/edit.html',
+				controller: 'TransportsEditController',
+				routeTitle: 'Édition | Transports',
+				routeName: 'transports_edit'
+			}).
+			when('/transports/list', {
+				templateUrl: 'views/transports/list.html',
+				controller: 'TransportsListController',
+				routeTitle: 'Liste | Transports',
+				routeName: 'transports_list'
+			}).
 			when('/drivers/add', {
 				templateUrl: 'views/drivers/edit.html',
 				controller: 'DriversAddController',

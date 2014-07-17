@@ -42,7 +42,7 @@
 									<table class="table">
 										<tr ng-repeat="log in product.logs">
 											<td ng-if="log.quantity > 0" class="success">Entrée</td>
-											<td ng-if="log.quantity < 0" class="danger">Entrée</td>
+											<td ng-if="log.quantity < 0" class="danger">Sortie</td>
 											<td>{{ log.quantity }}</td>
 											<td>{{ log.created_at }}</td>
 										</tr>

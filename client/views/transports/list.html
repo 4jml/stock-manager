@@ -1,0 +1,90 @@
+<section class="content-header">
+	<h1>
+		Transports
+		<small>Liste</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+		<li class="active">Transports</li>
+	</ol>
+</section>
+
+<section class="content">
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title">Transports en cours de traitement</h3>
+					<div class="pull-right box-tools">
+						<a href="#/transports/add" class="btn btn-success"><span class="fa fa-plus"></span> Ajouter</a>
+					</div>
+				</div>
+				<div class="box-body table-responsive">
+					<table id="transports_table" class="table table-hover table-striped" datatable watch="transports">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Stock de départ</th>
+								<th>Stock d'arrivée</th>
+								<th>Date de départ</th>
+								<th>Date d'arrivée</th>
+								<th>Créé le</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="transport in transports | filter:{ validated:0 }">
+								<td>{{ transport.id }}</td>
+								<td ng-if="transport.departure.name">{{ transport.departure.name }}</td>
+								<td ng-if="!transport.departure.name">Stock central</td>
+								<td ng-if="transport.arrival.name">{{ transport.arrival.name }}</td>
+								<td ng-if="!transport.arrival.name">Stock central</td>
+								<td>{{ transport.start }}</td>
+								<td>{{ transport.end }}</td>
+								<td>{{ transport.created_at }}</td>
+								<td>
+									<a href="#/transports/edit/{{ transport.id }}" class="btn btn-primary btn-xs"><span class="fa fa-pencil"></span></a>
+									<button ng-click="delete(transport.id)" class="btn btn-danger btn-xs"><span class="fa fa-trash-o"></span></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- /.box-body -->
+			</div>
+		</div>
+
+		<div class="col-lg-6">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title">Transports validés</h3>
+				</div>
+				<div class="box-body table-responsive">
+					<table id="transports_table" class="table table-hover table-striped" datatable watch="transports">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Stock de départ</th>
+								<th>Stock d'arrivée</th>
+								<th>Date de départ</th>
+								<th>Date d'arrivée</th>
+								<th>Validé le</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="transport in transports | filter:{ validated:1 }">
+								<td>{{ transport.id }}</td>
+								<td ng-if="transport.departure.name">{{ transport.departure.name }}</td>
+								<td ng-if="!transport.departure.name">Stock central</td>
+								<td ng-if="transport.arrival.name">{{ transport.arrival.name }}</td>
+								<td ng-if="!transport.arrival.name">Stock central</td>
+								<td>{{ transport.start }}</td>
+								<td>{{ transport.end }}</td>
+								<td>{{ transport.updated_at }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- /.box-body -->
+			</div>
+		</div>
+	</div>
+</section><!-- /.content -->

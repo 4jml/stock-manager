@@ -55,6 +55,9 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('vehicules', 'VehiculesController');
 	Route::resource('drivers', 'DriversController');
 
+	Route::resource('transports', 'TransportsController');
+	Route::resource('transports.lines', 'TransportLinesController');
+
 	Route::resource('orders', 'OrdersController');
 	Route::resource('orders.lines', 'OrderLinesController');
 
