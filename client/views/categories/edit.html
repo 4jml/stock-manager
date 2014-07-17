@@ -20,7 +20,6 @@
 				<!-- form start -->
 				<form role="form" ng-submit="save()">
 					<div class="box-body">
-						{{ category }}
 						<div class="form-group">
 							<label>Section parente</label>
 							<select name="section" class="form-control" ng-model="category.section_id" ng-options="section.id as section.name for section in sections">
