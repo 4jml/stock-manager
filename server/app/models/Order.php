@@ -4,7 +4,7 @@ class Order extends Eloquent {
 
     protected $softDelete = true;
 
-	protected $fillable = array('supplier_id', 'product_id', 'validated');
+	protected $fillable = array('supplier_id');
 
 	public function orderLines()
 	{

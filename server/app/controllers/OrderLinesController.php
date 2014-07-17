@@ -26,7 +26,7 @@ class OrderLinesController extends \BaseController {
         $validator = Validator::make($inputs, array(
             'order_id' => 'required|exists:orders,id',
             'product_id' => 'required|integer',
-            'quantity' => 'required|integer'
+            'quantity' => 'required|integer|min:0'
         ));
 
         $order = Order::findOrFail($orderId);
@@ -54,8 +54,8 @@ class OrderLinesController extends \BaseController {
     public function update($orderId, $orderLineId)
     {
         $validator = Validator::make(Input::all(), array(
-            'product_id' => 'required|integer',
-            'quantity' => 'required|integer'
+            'product_id' => 'integer',
+            'quantity' => 'integer|min:0'
         ));
 
         $order = Order::findOrFail($orderId);

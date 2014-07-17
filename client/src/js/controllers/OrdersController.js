@@ -57,8 +57,6 @@ stockManager.controller('OrdersEditController', function ($scope, $routeParams, 
 		}
 
 		if (ok) {
-			$scope.order.put();
-
 			angular.forEach($scope.order.order_lines, function(line) {
 				if (typeof line.id == 'undefined') {
 					promises.push($scope.order.post('lines', line));
@@ -67,18 +65,20 @@ stockManager.controller('OrdersEditController', function ($scope, $routeParams, 
 				}
 			});
 
-			function saved() {
-				if ($scope.order.validated) {
-					$location.path('/orders/list');
-				} else {
-					$scope.reload();
-				}
+			function linesSaved() {
+				$scope.order.put().then(function() {
+					if ($scope.order.validated) {
+						$location.path('/orders/list');
+					} else {
+						$scope.reload();
+					}
+				});
 			}
 
 			if (promises.length > 0) {
-				$q.all(promises).then(saved);
+				$q.all(promises).then(linesSaved);
 			} else {
-				saved();
+				linesSaved();
 			}
 		}
 	};

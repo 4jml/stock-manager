@@ -73,7 +73,27 @@ class OrdersController extends \BaseController {
 
         if ($validator->passes() && !$order->validated) {
             $order->fill(Input::all());
+            $order->validated = Input::get('validated');
             $order->save();
+
+            if (Input::get('validated')) {
+                $lines = OrderLine::where('order_id', '=', $order->id)->get();
+
+                foreach ($lines as $line) {
+                    $stockEntry = CentralStock::where('product_id', '=', $line->product_id)->first();
+                    $stockEntry = ($stockEntry == null) ? new CentralStock : $stockEntry;
+                    $stockEntry->product_id = $line->product_id;
+                    $stockEntry->quantity += $line->quantity;
+                    $stockEntry->save();
+
+                    $stockLog = new CentralStockLog;
+                    $stockLog->product_id = $line->product_id;
+                    $stockLog->user_id = Auth::user()->id;
+                    $stockLog->lot = substr(strtoupper(md5(time() + rand(0, 1000))), 0, 14); // Weeeeeeee o/
+                    $stockLog->quantity = $line->quantity;
+                    $stockLog->save();
+                }
+            }
 
             return Response::json($order);
         } else {
