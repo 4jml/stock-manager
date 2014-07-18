@@ -54,21 +54,38 @@
 					<h3 class="box-title">Liste des produits en stock</strong></h3>
 				</div><!-- /.box-header -->
 				<div class="box-body table-responsive">
-					<table id="products_table" class="table table-hover table-striped" datatable watch="products">
+					<table id="products_table" class="table table-hover table-striped">
 						<thead>
 							<tr>
+								<th></th>
 								<th>#</th>
 								<th>Nom</th>
 								<th>Prix</th>
 								<th>Quantité</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr ng-repeat="product in products">
+						<tbody ng-repeat="product in products">
+							<tr>
+								<td>
+									<button ng-show="selectedProduct.id != product.id" class="btn btn-success btn-xs" ng-click="load(product, true)"><span class="fa fa-plus"></span></button>
+									<button ng-show="selectedProduct.id == product.id" class="btn btn-danger btn-xs" ng-click="load(product, false)"><span class="fa fa-ellipsis-h"></span></button>
+								</td>
 								<td>{{ product.id }}</td>
 								<td>{{ product.name }}</td>
 								<td>{{ product.price }}</td>
 								<td>{{ product.quantity }}</td>
+							</tr>
+							<tr ng-show="selectedProduct.id">
+								<td colspan="5" style="padding:0">
+									<table class="table">
+										<tr ng-repeat="log in product.logs">
+											<td ng-if="log.quantity > 0" class="success">Entrée</td>
+											<td ng-if="log.quantity < 0" class="danger">Sortie</td>
+											<td>{{ log.quantity }}</td>
+											<td>{{ log.created_at }}</td>
+										</tr>
+									</table>
+								</td>
 							</tr>
 						</tbody>
 					</table>

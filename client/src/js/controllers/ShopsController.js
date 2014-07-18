@@ -16,9 +16,27 @@ stockManager.controller('ShopsEditController', function ($scope, $routeParams, R
 	Restangular.one("shops", $routeParams.id).get().then(function(shop) {
 		$scope.shop = shop;
 	});
+
 	Restangular.one("shops", $routeParams.id).getList('products').then(function(products) {
 		$scope.products = products;
 	});
+
+	$scope.load = function(product, action) {
+		if (action) {
+			if (typeof product.logs == "undefined") {
+				$scope.shop.getList('logs/' + product.id).then(function(logs) {
+					product.logs = logs;
+					$scope.selectedProduct = product;
+				});
+			}
+			else {
+				$scope.selectedProduct = product;
+			}
+		}
+		else {
+			$scope.selectedProduct = null;
+		}
+	};
 
 	$scope.save = function() {
 		$scope.shop.put();

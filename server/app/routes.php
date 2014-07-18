@@ -44,6 +44,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::controller('users', 'UsersController');
 
 	Route::resource('shops.products', 'ShopsProductsController');
+	Route::resource('shops.logs', 'StockLogsController');
 
 	Route::resource('products.suppliers', 'ProductsSuppliersController');
 	Route::resource('products.stocks', 'ProductsStocksController');
