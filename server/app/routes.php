@@ -66,6 +66,8 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('central/stocks', 'CentralStocksController');
 	Route::resource('central/stocks/logs', 'CentralStockLogsController');
 
+	Route::resource('checkout', 'CheckoutController');
+
 	// Statistics
 	Route::controller('drive/statistics', 'DriveOrdersStatisticsController');
 
